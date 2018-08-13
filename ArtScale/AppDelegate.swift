@@ -16,7 +16,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+//        let pencilViewController = PencilViewController(artModelHandler: createController())
+//        window?.rootViewController = pencilViewController
+//        window?.makeKeyAndVisible()
         return true
+    }
+    
+    private func createController() -> ArtModelController {
+        let artModelController = ArtModelController()
+        return artModelController
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		913EE42421222F4E0037B667 /* ArtModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913EE42321222F4E0037B667 /* ArtModel.swift */; };
+		913EE42621222FD30037B667 /* ArtModelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913EE42521222FD30037B667 /* ArtModelController.swift */; };
+		913EE428212231950037B667 /* PencilViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913EE427212231950037B667 /* PencilViewController.swift */; };
+		913EE42A212235400037B667 /* ArtModelUIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913EE429212235400037B667 /* ArtModelUIController.swift */; };
 		91425641211BBBCB00786E4E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91425640211BBBCB00786E4E /* AppDelegate.swift */; };
 		91425643211BBBCB00786E4E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91425642211BBBCB00786E4E /* ViewController.swift */; };
 		91425646211BBBCB00786E4E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 91425644211BBBCB00786E4E /* Main.storyboard */; };
@@ -35,6 +39,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		913EE42321222F4E0037B667 /* ArtModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtModel.swift; sourceTree = "<group>"; };
+		913EE42521222FD30037B667 /* ArtModelController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtModelController.swift; sourceTree = "<group>"; };
+		913EE427212231950037B667 /* PencilViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PencilViewController.swift; sourceTree = "<group>"; };
+		913EE429212235400037B667 /* ArtModelUIController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtModelUIController.swift; sourceTree = "<group>"; };
 		9142563D211BBBCB00786E4E /* ArtScale.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ArtScale.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		91425640211BBBCB00786E4E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		91425642211BBBCB00786E4E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -106,6 +114,10 @@
 				91425649211BBBCB00786E4E /* LaunchScreen.storyboard */,
 				9142564C211BBBCB00786E4E /* Info.plist */,
 				915CF3C4211BCA6000056709 /* PencilView.swift */,
+				913EE42321222F4E0037B667 /* ArtModel.swift */,
+				913EE42521222FD30037B667 /* ArtModelController.swift */,
+				913EE427212231950037B667 /* PencilViewController.swift */,
+				913EE429212235400037B667 /* ArtModelUIController.swift */,
 			);
 			path = ArtScale;
 			sourceTree = "<group>";
@@ -260,8 +272,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				91425643211BBBCB00786E4E /* ViewController.swift in Sources */,
+				913EE42621222FD30037B667 /* ArtModelController.swift in Sources */,
+				913EE42421222F4E0037B667 /* ArtModel.swift in Sources */,
+				913EE42A212235400037B667 /* ArtModelUIController.swift in Sources */,
 				915CF3C5211BCA6000056709 /* PencilView.swift in Sources */,
 				91425641211BBBCB00786E4E /* AppDelegate.swift in Sources */,
+				913EE428212231950037B667 /* PencilViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
