@@ -26,6 +26,8 @@ protocol ArtModelHandler: class {
     
     var delegate: ArtModelDelegate? { get set }
     func fetchArtModel()
+    func startTouch()
+    func endTouch()
 }
 
 final class ArtModelController: ArtModelHandler {
@@ -33,5 +35,13 @@ final class ArtModelController: ArtModelHandler {
     func fetchArtModel() {
         // Do some stuff to get the state of the ArtModel
         print("ArtModelController fetchArtModel()")
+    }
+    
+    func startTouch() {
+        print("ArtModelController startTouch")
+    }
+    
+    func endTouch() {
+        print("ArtModelController endTouch")
     }
 }

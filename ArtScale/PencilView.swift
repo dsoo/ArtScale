@@ -18,7 +18,22 @@ class PencilView: UIView {
         super.init(coder: aDecoder)
         isMultipleTouchEnabled = true
     }
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        print("touchesBegan", touches)
+    
+    override func draw(_ rect: CGRect) {
+        print("PencilView draw")
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.alignment = .center
+        
+        let attributes = [
+            NSAttributedStringKey.paragraphStyle: paragraphStyle,
+            NSAttributedStringKey.font: UIFont.systemFont(ofSize: 12.0),
+            NSAttributedStringKey.foregroundColor: UIColor.blue
+        ]
+        
+        let myText = "HELLO"
+        let attributedString = NSAttributedString(string: myText, attributes: attributes)
+        
+        let stringRect = CGRect(x: 50, y: 50, width: 100, height: 100)
+        attributedString.draw(in: stringRect)
     }
 }

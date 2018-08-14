@@ -24,6 +24,7 @@ final class PencilViewController: UIViewController {
     
     @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
+        print("PencilViewController init coder")
         self.artModelHandler = ArtModelController()
         super.init(coder: aDecoder)
 //        fatalError("init(coder:) has not been implemented")
@@ -42,4 +43,18 @@ final class PencilViewController: UIViewController {
         
         artModelHandler.fetchArtModel()
     }
+
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        print("touchesBegan")
+        artModelHandler.startTouch()
+    }
+    
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        print("touchesMoved")
+    }
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        print("touchesEnded")
+        artModelHandler.endTouch()
+    }
+    
 }
