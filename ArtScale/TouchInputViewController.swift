@@ -1,5 +1,5 @@
 //
-//  PencilViewController.swift
+//  TouchInputViewController.swift
 //  ArtScale
 //
 //  Created by Douglas Soo on 8/13/18.
@@ -12,22 +12,20 @@
 
 import UIKit
 
-final class PencilViewController: UIViewController {
+final class TouchInputViewController: UIViewController {
     
-    private let artModelHandler: ArtModelHandler
-    private var artModelUIController: ArtModelUIController!
+    private let touchInputHandler: TouchInputHandler
     
-    init(artModelHandler: ArtModelHandler) {
-        self.artModelHandler = artModelHandler
+    init(touchInputHandler: TouchInputHandler) {
+        self.touchInputHandler = touchInputHandler
         super.init(nibName: nil, bundle: nil)
     }
     
     @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
-        print("PencilViewController init coder")
-        self.artModelHandler = ArtModelController()
+        print("TouchInputViewController init coder")
+        self.touchInputHandler = StrokeModelInputHandler()
         super.init(coder: aDecoder)
-//        fatalError("init(coder:) has not been implemented")
     }
     
     override func viewDidLayoutSubviews() {
@@ -35,26 +33,24 @@ final class PencilViewController: UIViewController {
     }
     
     override func viewDidLoad() {
-        print("PencilViewController viewDidLoad")
+        print("TouchInputViewController viewDidLoad")
         super.viewDidLoad()
         
-        artModelUIController = ArtModelUIController(view: view)
-        artModelHandler.delegate = artModelUIController
-        
-        artModelHandler.fetchArtModel()
+        // Load the current state from the model
+        touchInputHandler.syncState()
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         print("touchesBegan")
-        artModelHandler.startTouch()
+        touchInputHandler.startTouch()
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        print("touchesMoved")
+//        print("touchesMoved")
     }
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         print("touchesEnded")
-        artModelHandler.endTouch()
+        touchInputHandler.endTouch()
     }
     
 }

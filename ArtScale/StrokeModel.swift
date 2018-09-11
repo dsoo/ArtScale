@@ -1,5 +1,5 @@
 //
-//  ArtModel.swift
+//  StrokeModel.swift
 //  ArtScale
 //
 //  Created by Douglas Soo on 8/13/18.
@@ -8,6 +8,6 @@
 
 import Foundation
 
-struct ArtModel {
+struct StrokeModel {
     let stroke: String
 }

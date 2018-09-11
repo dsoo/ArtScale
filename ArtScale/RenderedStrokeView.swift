@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PencilView: UIView {
+class RenderedStrokeView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         isMultipleTouchEnabled = true
@@ -20,7 +20,7 @@ class PencilView: UIView {
     }
     
     override func draw(_ rect: CGRect) {
-        print("PencilView draw")
+        print("RenderedStrokeView draw")
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = .center
         

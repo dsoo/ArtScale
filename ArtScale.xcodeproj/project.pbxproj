@@ -7,10 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		913EE42421222F4E0037B667 /* ArtModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913EE42321222F4E0037B667 /* ArtModel.swift */; };
-		913EE42621222FD30037B667 /* ArtModelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913EE42521222FD30037B667 /* ArtModelController.swift */; };
-		913EE428212231950037B667 /* PencilViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913EE427212231950037B667 /* PencilViewController.swift */; };
-		913EE42A212235400037B667 /* ArtModelUIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913EE429212235400037B667 /* ArtModelUIController.swift */; };
+		913EE42421222F4E0037B667 /* StrokeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913EE42321222F4E0037B667 /* StrokeModel.swift */; };
+		913EE42621222FD30037B667 /* StrokeModelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913EE42521222FD30037B667 /* StrokeModelController.swift */; };
+		913EE428212231950037B667 /* TouchInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913EE427212231950037B667 /* TouchInputViewController.swift */; };
 		91425641211BBBCB00786E4E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91425640211BBBCB00786E4E /* AppDelegate.swift */; };
 		91425643211BBBCB00786E4E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91425642211BBBCB00786E4E /* ViewController.swift */; };
 		91425646211BBBCB00786E4E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 91425644211BBBCB00786E4E /* Main.storyboard */; };
@@ -18,7 +17,9 @@
 		9142564B211BBBCB00786E4E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 91425649211BBBCB00786E4E /* LaunchScreen.storyboard */; };
 		91425656211BBBCB00786E4E /* ArtScaleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91425655211BBBCB00786E4E /* ArtScaleTests.swift */; };
 		91425661211BBBCB00786E4E /* ArtScaleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91425660211BBBCB00786E4E /* ArtScaleUITests.swift */; };
-		915CF3C5211BCA6000056709 /* PencilView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915CF3C4211BCA6000056709 /* PencilView.swift */; };
+		915CF3C5211BCA6000056709 /* RenderedStrokeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915CF3C4211BCA6000056709 /* RenderedStrokeView.swift */; };
+		91913A7B21473311005D9108 /* TouchInputHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91913A7A21473311005D9108 /* TouchInputHandler.swift */; };
+		91913A7D21473CE1005D9108 /* StrokeModelInputHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91913A7C21473CE1005D9108 /* StrokeModelInputHandler.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,10 +40,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		913EE42321222F4E0037B667 /* ArtModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtModel.swift; sourceTree = "<group>"; };
-		913EE42521222FD30037B667 /* ArtModelController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtModelController.swift; sourceTree = "<group>"; };
-		913EE427212231950037B667 /* PencilViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PencilViewController.swift; sourceTree = "<group>"; };
-		913EE429212235400037B667 /* ArtModelUIController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtModelUIController.swift; sourceTree = "<group>"; };
+		913EE42321222F4E0037B667 /* StrokeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrokeModel.swift; sourceTree = "<group>"; };
+		913EE42521222FD30037B667 /* StrokeModelController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrokeModelController.swift; sourceTree = "<group>"; };
+		913EE427212231950037B667 /* TouchInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchInputViewController.swift; sourceTree = "<group>"; };
 		9142563D211BBBCB00786E4E /* ArtScale.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ArtScale.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		91425640211BBBCB00786E4E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		91425642211BBBCB00786E4E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -56,7 +56,9 @@
 		9142565C211BBBCB00786E4E /* ArtScaleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ArtScaleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		91425660211BBBCB00786E4E /* ArtScaleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtScaleUITests.swift; sourceTree = "<group>"; };
 		91425662211BBBCB00786E4E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		915CF3C4211BCA6000056709 /* PencilView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PencilView.swift; sourceTree = "<group>"; };
+		915CF3C4211BCA6000056709 /* RenderedStrokeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RenderedStrokeView.swift; sourceTree = "<group>"; };
+		91913A7A21473311005D9108 /* TouchInputHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchInputHandler.swift; sourceTree = "<group>"; };
+		91913A7C21473CE1005D9108 /* StrokeModelInputHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrokeModelInputHandler.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,17 +109,18 @@
 		9142563F211BBBCB00786E4E /* ArtScale */ = {
 			isa = PBXGroup;
 			children = (
+				91425644211BBBCB00786E4E /* Main.storyboard */,
+				91425649211BBBCB00786E4E /* LaunchScreen.storyboard */,
+				91425647211BBBCB00786E4E /* Assets.xcassets */,
+				9142564C211BBBCB00786E4E /* Info.plist */,
 				91425640211BBBCB00786E4E /* AppDelegate.swift */,
 				91425642211BBBCB00786E4E /* ViewController.swift */,
-				91425644211BBBCB00786E4E /* Main.storyboard */,
-				91425647211BBBCB00786E4E /* Assets.xcassets */,
-				91425649211BBBCB00786E4E /* LaunchScreen.storyboard */,
-				9142564C211BBBCB00786E4E /* Info.plist */,
-				915CF3C4211BCA6000056709 /* PencilView.swift */,
-				913EE42321222F4E0037B667 /* ArtModel.swift */,
-				913EE42521222FD30037B667 /* ArtModelController.swift */,
-				913EE427212231950037B667 /* PencilViewController.swift */,
-				913EE429212235400037B667 /* ArtModelUIController.swift */,
+				915CF3C4211BCA6000056709 /* RenderedStrokeView.swift */,
+				913EE427212231950037B667 /* TouchInputViewController.swift */,
+				91913A7A21473311005D9108 /* TouchInputHandler.swift */,
+				913EE42321222F4E0037B667 /* StrokeModel.swift */,
+				913EE42521222FD30037B667 /* StrokeModelController.swift */,
+				91913A7C21473CE1005D9108 /* StrokeModelInputHandler.swift */,
 			);
 			path = ArtScale;
 			sourceTree = "<group>";
@@ -272,12 +275,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				91425643211BBBCB00786E4E /* ViewController.swift in Sources */,
-				913EE42621222FD30037B667 /* ArtModelController.swift in Sources */,
-				913EE42421222F4E0037B667 /* ArtModel.swift in Sources */,
-				913EE42A212235400037B667 /* ArtModelUIController.swift in Sources */,
-				915CF3C5211BCA6000056709 /* PencilView.swift in Sources */,
+				91913A7B21473311005D9108 /* TouchInputHandler.swift in Sources */,
+				913EE42621222FD30037B667 /* StrokeModelController.swift in Sources */,
+				913EE42421222F4E0037B667 /* StrokeModel.swift in Sources */,
+				915CF3C5211BCA6000056709 /* RenderedStrokeView.swift in Sources */,
 				91425641211BBBCB00786E4E /* AppDelegate.swift in Sources */,
-				913EE428212231950037B667 /* PencilViewController.swift in Sources */,
+				913EE428212231950037B667 /* TouchInputViewController.swift in Sources */,
+				91913A7D21473CE1005D9108 /* StrokeModelInputHandler.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
