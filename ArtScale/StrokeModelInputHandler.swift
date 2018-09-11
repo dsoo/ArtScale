@@ -8,7 +8,7 @@
 
 import Foundation
 
-final class StrokeModelInputHandler: TouchInputHandler {
+final class StrokeModelInputHandler: StrokeInputHandler {
     var delegate: StrokeModelDelegate?
     
     func syncState() {
@@ -16,12 +16,16 @@ final class StrokeModelInputHandler: TouchInputHandler {
         print("StrokeModelInputHandler syncState()")
     }
     
-    func startTouch() {
-        print("StrokeModelInputHandler startTouch")
+    func startStroke() {
+        print("StrokeModelInputHandler startStroke")
     }
-    
-    func endTouch() {
-        print("StrokeModelInputHandler endTouch")
+
+    func updateStroke() {
+        print("StrokeModelInputHandler updateStroke")
+    }
+
+    func endStroke() {
+        print("StrokeModelInputHandler endStroke")
         print("StrokeModelInputHandler creates new stroke")
     }
 }

@@ -7,24 +7,26 @@
 //
 
 // Handles user input that adds additional stroke information to the ArtModel
-// Renders the current state based on the ArtModel
-// Generically implements this without worrying about the mechanics of how the model is retrieved and updated
+// Filters out multitouch events, only takes in pencil events
+// In the future will pass UI state into the StrokeInputHandler
+
 
 import UIKit
 
 final class TouchInputViewController: UIViewController {
     
-    private let touchInputHandler: TouchInputHandler
+    private let strokeInputHandler: StrokeInputHandler
     
-    init(touchInputHandler: TouchInputHandler) {
-        self.touchInputHandler = touchInputHandler
+    init(strokeInputHandler: StrokeInputHandler) {
+        self.strokeInputHandler = strokeInputHandler
         super.init(nibName: nil, bundle: nil)
     }
     
     @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         print("TouchInputViewController init coder")
-        self.touchInputHandler = StrokeModelInputHandler()
+        // FIXME: This should initialize someplace better
+        self.strokeInputHandler = StrokeModelInputHandler()
         super.init(coder: aDecoder)
     }
     
@@ -37,20 +39,21 @@ final class TouchInputViewController: UIViewController {
         super.viewDidLoad()
         
         // Load the current state from the model
-        touchInputHandler.syncState()
+        strokeInputHandler.syncState()
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         print("touchesBegan")
-        touchInputHandler.startTouch()
+        strokeInputHandler.startStroke()
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
 //        print("touchesMoved")
+        strokeInputHandler.updateStroke()
     }
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         print("touchesEnded")
-        touchInputHandler.endTouch()
+        strokeInputHandler.endStroke()
     }
     
 }

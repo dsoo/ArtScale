@@ -1,5 +1,5 @@
 //
-//  TouchInputHandler.swift
+//  StrokeInputHandler.swift
 //  ArtScale
 //
 // Handles touch events coming from the UI and translates them into strokes and
@@ -11,8 +11,9 @@
 
 import Foundation
 
-protocol TouchInputHandler: class {
+protocol StrokeInputHandler: class {
     func syncState()
-    func startTouch()
-    func endTouch()
+    func startStroke()
+    func updateStroke()
+    func endStroke()
 }
