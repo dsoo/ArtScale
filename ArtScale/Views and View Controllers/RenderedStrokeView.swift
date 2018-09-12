@@ -12,6 +12,10 @@ import UIKit
 //    let points: [CGPoint] = []
 //}
 
+protocol RenderedStrokeDataSource {
+    
+}
+
 class RenderedStrokeView: UIView {
     var renderedStrokes: [Stroke] = []
     

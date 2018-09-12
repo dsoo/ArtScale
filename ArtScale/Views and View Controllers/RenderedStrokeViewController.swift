@@ -14,13 +14,10 @@
 import UIKit
 
 final class RenderedStrokeViewController: UIViewController, StrokeModelWatcherDelegate {
-    
+    @IBOutlet weak var renderedStrokeView: RenderedStrokeView?
     private let strokeModel = StrokeModel()
     private var strokeInputHandler: StrokeInputHandler?
     private var locations: [CGPoint] = []
-    
-    // FIXME: Must be a better way to do this than to cast in a computed type
-    var rsView: RenderedStrokeView! { return self.view as! RenderedStrokeView }
     
     @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
@@ -48,12 +45,11 @@ final class RenderedStrokeViewController: UIViewController, StrokeModelWatcherDe
     //
     // Stroke updates
     //
-    
     func strokesUpdated() {
         // Transform the "abstract" strokes coming from the model into "rendering strokes"
         // Tell the UI to redraw based on the rendering strokes in the controller
         // FIXME: Being lazy and just directly passing stroke data to renderer for now
-        rsView.renderedStrokes = strokeModel.allStrokes()
+        renderedStrokeView?.renderedStrokes = strokeModel.allStrokes()
         view.setNeedsDisplay()
     }
     
