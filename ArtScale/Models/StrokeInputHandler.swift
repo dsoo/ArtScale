@@ -13,7 +13,7 @@ import Foundation
 
 protocol StrokeInputHandler: class {
     func syncState()
-    func startStroke()
-    func updateStroke()
-    func endStroke()
+    func startStroke(stroke: Stroke)
+    func updateStroke(stroke: Stroke)
+    func endStroke(stroke: Stroke)
 }

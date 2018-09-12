@@ -11,21 +11,21 @@ import Foundation
 final class StrokeModelInputHandler: StrokeInputHandler {
     var delegate: StrokeModelDelegate?
     
-    func syncState() {
-        // Do some stuff to retrieve the latest state of the model
-        print("StrokeModelInputHandler syncState()")
+    required init(strokeModel: StrokeModelDelegate) {
+        delegate = strokeModel
     }
     
-    func startStroke() {
-        print("StrokeModelInputHandler startStroke")
+    func syncState() {
+        // Do some stuff to retrieve the latest state of the model
+    }
+    
+    func startStroke(stroke: Stroke) {
     }
 
-    func updateStroke() {
-        print("StrokeModelInputHandler updateStroke")
+    func updateStroke(stroke: Stroke) {
     }
 
-    func endStroke() {
-        print("StrokeModelInputHandler endStroke")
-        print("StrokeModelInputHandler creates new stroke")
+    func endStroke(stroke: Stroke) {
+        delegate?.addStroke(stroke: stroke)
     }
 }
