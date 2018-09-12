@@ -12,6 +12,7 @@
 
 
 import UIKit
+import CleanroomLogger
 
 final class RenderedStrokeViewController: UIViewController, StrokeModelWatcherDelegate {
     @IBOutlet weak var renderedStrokeView: RenderedStrokeView?
@@ -31,6 +32,7 @@ final class RenderedStrokeViewController: UIViewController, StrokeModelWatcherDe
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        Log.info?.trace()
         // FIXME: This should initialize someplace better
         strokeModel.delegate = self
         let smih = StrokeModelInputHandler(strokeModel: strokeModel)
@@ -50,6 +52,7 @@ final class RenderedStrokeViewController: UIViewController, StrokeModelWatcherDe
         // Tell the UI to redraw based on the rendering strokes in the controller
         // FIXME: Being lazy and just directly passing stroke data to renderer for now
         renderedStrokeView?.renderedStrokes = strokeModel.allStrokes()
+        Log.info?.trace()
         view.setNeedsDisplay()
     }
     
