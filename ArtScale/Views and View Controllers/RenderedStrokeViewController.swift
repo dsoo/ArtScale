@@ -14,9 +14,9 @@
 import UIKit
 import CleanroomLogger
 
-final class RenderedStrokeViewController: UIViewController, StrokeModelWatcherDelegate {
+final class RenderedStrokeViewController: UIViewController, CanvasModelWatcherDelegate {
     @IBOutlet weak var renderedStrokeView: RenderedStrokeView?
-    private let strokeModel = StrokeModel()
+    private let strokeModel = CanvasModel()
     private var strokeInputHandler: StrokeInputHandler?
     private var locations: [CGPoint] = []
     
@@ -35,7 +35,7 @@ final class RenderedStrokeViewController: UIViewController, StrokeModelWatcherDe
         Log.info?.trace()
         // FIXME: This should initialize someplace better
         strokeModel.delegate = self
-        let smih = StrokeModelInputHandler(strokeModel: strokeModel)
+        let smih = CanvasModelStrokeInputHandler(strokeModel: strokeModel)
         strokeInputHandler = smih
     }
 
@@ -47,7 +47,7 @@ final class RenderedStrokeViewController: UIViewController, StrokeModelWatcherDe
     //
     // Stroke updates
     //
-    func strokesUpdated() {
+    func canvasUpdated() {
         // Transform the "abstract" strokes coming from the model into "rendering strokes"
         // Tell the UI to redraw based on the rendering strokes in the controller
         // FIXME: Being lazy and just directly passing stroke data to renderer for now

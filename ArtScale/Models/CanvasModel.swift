@@ -6,22 +6,23 @@
 //  Copyright © 2018 Scalable Interfaces LLC. All rights reserved.
 //
 
+// Only importing for CGPoint
 import UIKit
 
 struct Stroke {
     var points: [CGPoint]
 }
 
-protocol StrokeModelWatcherDelegate: class {
-    func strokesUpdated()
+protocol CanvasModelWatcherDelegate: class {
+    func canvasUpdated()
 }
 
-protocol StrokeModelDelegate: class {
+protocol CanvasModelDelegate: class {
     func addStroke(stroke: Stroke)
 }
 
-class StrokeModel: StrokeModelDelegate {
-    weak var delegate: StrokeModelWatcherDelegate?
+class CanvasModel: CanvasModelDelegate {
+    weak var delegate: CanvasModelWatcherDelegate?
     
     private var strokes: [Stroke] = []
 
@@ -31,6 +32,6 @@ class StrokeModel: StrokeModelDelegate {
     
     func addStroke(stroke: Stroke) {
         strokes.append(stroke)
-        delegate?.strokesUpdated()
+        delegate?.canvasUpdated()
     }
 }

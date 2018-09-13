@@ -8,10 +8,10 @@
 
 import Foundation
 
-final class StrokeModelInputHandler: StrokeInputHandler {
-    var delegate: StrokeModelDelegate?
+final class CanvasModelStrokeInputHandler: StrokeInputHandler {
+    var delegate: CanvasModelDelegate?
     
-    required init(strokeModel: StrokeModelDelegate) {
+    required init(strokeModel: CanvasModelDelegate) {
         delegate = strokeModel
     }
     

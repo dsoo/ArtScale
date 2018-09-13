@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		913EE42421222F4E0037B667 /* StrokeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913EE42321222F4E0037B667 /* StrokeModel.swift */; };
+		913EE42421222F4E0037B667 /* CanvasModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913EE42321222F4E0037B667 /* CanvasModel.swift */; };
 		913EE428212231950037B667 /* RenderedStrokeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913EE427212231950037B667 /* RenderedStrokeViewController.swift */; };
 		91425641211BBBCB00786E4E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91425640211BBBCB00786E4E /* AppDelegate.swift */; };
 		91425646211BBBCB00786E4E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 91425644211BBBCB00786E4E /* Main.storyboard */; };
@@ -17,7 +17,7 @@
 		91425661211BBBCB00786E4E /* ArtScaleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91425660211BBBCB00786E4E /* ArtScaleUITests.swift */; };
 		915CF3C5211BCA6000056709 /* RenderedStrokeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915CF3C4211BCA6000056709 /* RenderedStrokeView.swift */; };
 		91913A7B21473311005D9108 /* StrokeInputHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91913A7A21473311005D9108 /* StrokeInputHandler.swift */; };
-		91913A7D21473CE1005D9108 /* StrokeModelInputHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91913A7C21473CE1005D9108 /* StrokeModelInputHandler.swift */; };
+		91913A7D21473CE1005D9108 /* CanvasModelStrokeInputHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91913A7C21473CE1005D9108 /* CanvasModelStrokeInputHandler.swift */; };
 		91BC979C2149C54D00A52161 /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = 91BC979B2149C54D00A52161 /* Cartfile */; };
 		91BC979E2149C74F00A52161 /* CleanroomLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91BC979D2149C74F00A52161 /* CleanroomLogger.framework */; };
 		91BC979F2149C74F00A52161 /* CleanroomLogger.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 91BC979D2149C74F00A52161 /* CleanroomLogger.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -56,7 +56,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		913EE42321222F4E0037B667 /* StrokeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrokeModel.swift; sourceTree = "<group>"; };
+		913EE42321222F4E0037B667 /* CanvasModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasModel.swift; sourceTree = "<group>"; };
 		913EE427212231950037B667 /* RenderedStrokeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RenderedStrokeViewController.swift; sourceTree = "<group>"; };
 		9142563D211BBBCB00786E4E /* ArtScale.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ArtScale.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		91425640211BBBCB00786E4E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -72,7 +72,7 @@
 		91425662211BBBCB00786E4E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		915CF3C4211BCA6000056709 /* RenderedStrokeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RenderedStrokeView.swift; sourceTree = "<group>"; };
 		91913A7A21473311005D9108 /* StrokeInputHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrokeInputHandler.swift; sourceTree = "<group>"; };
-		91913A7C21473CE1005D9108 /* StrokeModelInputHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrokeModelInputHandler.swift; sourceTree = "<group>"; };
+		91913A7C21473CE1005D9108 /* CanvasModelStrokeInputHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasModelStrokeInputHandler.swift; sourceTree = "<group>"; };
 		91BC979B2149C54D00A52161 /* Cartfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile; sourceTree = SOURCE_ROOT; };
 		91BC979D2149C74F00A52161 /* CleanroomLogger.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CleanroomLogger.framework; path = Carthage/Build/iOS/CleanroomLogger.framework; sourceTree = "<group>"; };
 		91BC97A12149C98E00A52161 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = SOURCE_ROOT; };
@@ -161,8 +161,8 @@
 			isa = PBXGroup;
 			children = (
 				91913A7A21473311005D9108 /* StrokeInputHandler.swift */,
-				913EE42321222F4E0037B667 /* StrokeModel.swift */,
-				91913A7C21473CE1005D9108 /* StrokeModelInputHandler.swift */,
+				913EE42321222F4E0037B667 /* CanvasModel.swift */,
+				91913A7C21473CE1005D9108 /* CanvasModelStrokeInputHandler.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -321,11 +321,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				91913A7B21473311005D9108 /* StrokeInputHandler.swift in Sources */,
-				913EE42421222F4E0037B667 /* StrokeModel.swift in Sources */,
+				913EE42421222F4E0037B667 /* CanvasModel.swift in Sources */,
 				915CF3C5211BCA6000056709 /* RenderedStrokeView.swift in Sources */,
 				91425641211BBBCB00786E4E /* AppDelegate.swift in Sources */,
 				913EE428212231950037B667 /* RenderedStrokeViewController.swift in Sources */,
-				91913A7D21473CE1005D9108 /* StrokeModelInputHandler.swift in Sources */,
+				91913A7D21473CE1005D9108 /* CanvasModelStrokeInputHandler.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
