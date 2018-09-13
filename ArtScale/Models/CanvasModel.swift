@@ -23,13 +23,13 @@ protocol CanvasModelDelegate: class {
 
 class CanvasModel: CanvasModelDelegate {
     weak var delegate: CanvasModelWatcherDelegate?
-    
+
     private var strokes: [Stroke] = []
 
     func allStrokes() -> [Stroke] {
         return strokes
     }
-    
+
     func addStroke(stroke: Stroke) {
         strokes.append(stroke)
         delegate?.canvasUpdated()

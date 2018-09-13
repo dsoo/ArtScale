@@ -8,31 +8,29 @@
 
 import UIKit
 
-//struct RenderedStroke {
+// struct RenderedStroke {
 //    let points: [CGPoint] = []
-//}
+// }
 
-protocol RenderedStrokeDataSource {
-    
-}
+protocol RenderedStrokeDataSource {}
 
 class RenderedStrokeView: UIView {
     var renderedStrokes: [Stroke] = []
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         isMultipleTouchEnabled = true
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         isMultipleTouchEnabled = true
     }
-    
-    override func draw(_ rect: CGRect) {
+
+    override func draw(_: CGRect) {
         let color = UIColor.black
         let brushWidth: CGFloat = 10.0
-        
+
         guard let context = UIGraphicsGetCurrentContext() else {
             return
         }
@@ -43,7 +41,7 @@ class RenderedStrokeView: UIView {
         for stroke in renderedStrokes {
             var first = true
             for point in stroke.points {
-                if (!first) {
+                if !first {
                     context.addLine(to: point)
                 } else {
                     context.beginPath()

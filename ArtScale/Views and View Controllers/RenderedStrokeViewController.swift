@@ -10,28 +10,27 @@
 // Filters out multitouch events, only takes in pencil events
 // In the future will pass UI state into the StrokeInputHandler
 
-
-import UIKit
 import CleanroomLogger
+import UIKit
 
 final class RenderedStrokeViewController: UIViewController, CanvasModelWatcherDelegate {
-    @IBOutlet weak var renderedStrokeView: RenderedStrokeView?
+    @IBOutlet var renderedStrokeView: RenderedStrokeView?
     private let strokeModel = CanvasModel()
     private var strokeInputHandler: StrokeInputHandler?
     private var locations: [CGPoint] = []
-    
+
     @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-    
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         Log.info?.trace()
         // FIXME: This should initialize someplace better
         strokeModel.delegate = self
@@ -43,7 +42,7 @@ final class RenderedStrokeViewController: UIViewController, CanvasModelWatcherDe
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+
     //
     // Stroke updates
     //
@@ -55,36 +54,36 @@ final class RenderedStrokeViewController: UIViewController, CanvasModelWatcherDe
         Log.info?.trace()
         view.setNeedsDisplay()
     }
-    
+
     //
     // Input handling
     //
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    override func touchesBegan(_ touches: Set<UITouch>, with _: UIEvent?) {
         for touch in touches {
-            let l = touch.location(in:nil)
+            let l = touch.location(in: nil)
             locations.append(l)
         }
-        let s = Stroke(points:locations)
-        strokeInputHandler?.startStroke(stroke:s)
+        let s = Stroke(points: locations)
+        strokeInputHandler?.startStroke(stroke: s)
     }
-    
-    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+
+    override func touchesMoved(_ touches: Set<UITouch>, with _: UIEvent?) {
         for touch in touches {
-            let l = touch.location(in:nil)
+            let l = touch.location(in: nil)
             locations.append(l)
         }
-        let s = Stroke(points:locations)
-        strokeInputHandler?.updateStroke(stroke:s)
+        let s = Stroke(points: locations)
+        strokeInputHandler?.updateStroke(stroke: s)
     }
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+
+    override func touchesEnded(_ touches: Set<UITouch>, with _: UIEvent?) {
         for touch in touches {
-            let l = touch.location(in:nil)
+            let l = touch.location(in: nil)
             locations.append(l)
         }
 
-        let s = Stroke(points:locations)
-        strokeInputHandler?.endStroke(stroke:s)
+        let s = Stroke(points: locations)
+        strokeInputHandler?.endStroke(stroke: s)
         locations.removeAll()
     }
-    
 }

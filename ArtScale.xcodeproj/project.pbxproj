@@ -18,6 +18,7 @@
 		915CF3C5211BCA6000056709 /* RenderedStrokeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915CF3C4211BCA6000056709 /* RenderedStrokeView.swift */; };
 		91913A7B21473311005D9108 /* StrokeInputHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91913A7A21473311005D9108 /* StrokeInputHandler.swift */; };
 		91913A7D21473CE1005D9108 /* CanvasModelStrokeInputHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91913A7C21473CE1005D9108 /* CanvasModelStrokeInputHandler.swift */; };
+		91913A84214AD594005D9108 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 91913A83214AD594005D9108 /* .swiftlint.yml */; };
 		91BC979C2149C54D00A52161 /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = 91BC979B2149C54D00A52161 /* Cartfile */; };
 		91BC979E2149C74F00A52161 /* CleanroomLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91BC979D2149C74F00A52161 /* CleanroomLogger.framework */; };
 		91BC979F2149C74F00A52161 /* CleanroomLogger.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 91BC979D2149C74F00A52161 /* CleanroomLogger.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -73,6 +74,7 @@
 		915CF3C4211BCA6000056709 /* RenderedStrokeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RenderedStrokeView.swift; sourceTree = "<group>"; };
 		91913A7A21473311005D9108 /* StrokeInputHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrokeInputHandler.swift; sourceTree = "<group>"; };
 		91913A7C21473CE1005D9108 /* CanvasModelStrokeInputHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasModelStrokeInputHandler.swift; sourceTree = "<group>"; };
+		91913A83214AD594005D9108 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .swiftlint.yml; sourceTree = "<group>"; };
 		91BC979B2149C54D00A52161 /* Cartfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile; sourceTree = SOURCE_ROOT; };
 		91BC979D2149C74F00A52161 /* CleanroomLogger.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CleanroomLogger.framework; path = Carthage/Build/iOS/CleanroomLogger.framework; sourceTree = "<group>"; };
 		91BC97A12149C98E00A52161 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = SOURCE_ROOT; };
@@ -135,6 +137,7 @@
 				9142564C211BBBCB00786E4E /* Info.plist */,
 				91425647211BBBCB00786E4E /* Assets.xcassets */,
 				91BC97A12149C98E00A52161 /* .gitignore */,
+				91913A83214AD594005D9108 /* .swiftlint.yml */,
 			);
 			path = ArtScale;
 			sourceTree = "<group>";
@@ -291,6 +294,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				91913A84214AD594005D9108 /* .swiftlint.yml in Resources */,
 				91BC97A22149C98E00A52161 /* .gitignore in Resources */,
 				9142564B211BBBCB00786E4E /* LaunchScreen.storyboard in Resources */,
 				91425648211BBBCB00786E4E /* Assets.xcassets in Resources */,

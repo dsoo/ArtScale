@@ -9,21 +9,19 @@
 import Foundation
 
 final class CanvasModelStrokeInputHandler: StrokeInputHandler {
-    var delegate: CanvasModelDelegate?
-    
+    weak var delegate: CanvasModelDelegate?
+
     required init(strokeModel: CanvasModelDelegate) {
         delegate = strokeModel
     }
-    
+
     func syncState() {
         // Do some stuff to retrieve the latest state of the model
     }
-    
-    func startStroke(stroke: Stroke) {
-    }
 
-    func updateStroke(stroke: Stroke) {
-    }
+    func startStroke(stroke _: Stroke) {}
+
+    func updateStroke(stroke _: Stroke) {}
 
     func endStroke(stroke: Stroke) {
         delegate?.addStroke(stroke: stroke)
