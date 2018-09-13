@@ -14,7 +14,7 @@ import UIKit
 
 protocol RenderedStrokeDataSource {}
 
-class RenderedStrokeView: UIView {
+class CanvasView: UIView {
     var renderedStrokes: [Stroke] = []
 
     override init(frame: CGRect) {

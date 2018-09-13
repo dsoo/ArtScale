@@ -13,16 +13,12 @@ struct Stroke {
     var points: [CGPoint]
 }
 
-protocol CanvasModelWatcherDelegate: class {
+protocol CanvasModelDelegate: class {
     func canvasUpdated()
 }
 
-protocol CanvasModelDelegate: class {
-    func addStroke(stroke: Stroke)
-}
-
-class CanvasModel: CanvasModelDelegate {
-    weak var delegate: CanvasModelWatcherDelegate?
+class CanvasModel {
+    weak var delegate: CanvasModelDelegate?
 
     private var strokes: [Stroke] = []
 

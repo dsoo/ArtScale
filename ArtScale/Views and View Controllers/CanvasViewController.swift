@@ -13,10 +13,10 @@
 import CleanroomLogger
 import UIKit
 
-final class RenderedStrokeViewController: UIViewController, CanvasModelWatcherDelegate {
-    @IBOutlet var renderedStrokeView: RenderedStrokeView?
-    private let strokeModel = CanvasModel()
-    private var strokeInputHandler: StrokeInputHandler?
+final class CanvasViewController: UIViewController, CanvasViewModelDelegate {
+    @IBOutlet var canvasView: CanvasView!
+    private var canvasViewModel: CanvasViewModel = CanvasViewModel()
+
     private var locations: [CGPoint] = []
 
     @available(*, unavailable)
@@ -30,12 +30,8 @@ final class RenderedStrokeViewController: UIViewController, CanvasModelWatcherDe
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         Log.info?.trace()
-        // FIXME: This should initialize someplace better
-        strokeModel.delegate = self
-        let smih = CanvasModelStrokeInputHandler(strokeModel: strokeModel)
-        strokeInputHandler = smih
+        canvasViewModel.canvasView = canvasView
     }
 
     override func didReceiveMemoryWarning() {
@@ -44,27 +40,16 @@ final class RenderedStrokeViewController: UIViewController, CanvasModelWatcherDe
     }
 
     //
-    // Stroke updates
-    //
-    func canvasUpdated() {
-        // Transform the "abstract" strokes coming from the model into "rendering strokes"
-        // Tell the UI to redraw based on the rendering strokes in the controller
-        // FIXME: Being lazy and just directly passing stroke data to renderer for now
-        renderedStrokeView?.renderedStrokes = strokeModel.allStrokes()
-        Log.info?.trace()
-        view.setNeedsDisplay()
-    }
-
-    //
     // Input handling
     //
     override func touchesBegan(_ touches: Set<UITouch>, with _: UIEvent?) {
+        Log.info?.trace()
         for touch in touches {
             let l = touch.location(in: nil)
             locations.append(l)
         }
         let s = Stroke(points: locations)
-        strokeInputHandler?.startStroke(stroke: s)
+        canvasViewModel.startStroke(stroke: s)
     }
 
     override func touchesMoved(_ touches: Set<UITouch>, with _: UIEvent?) {
@@ -73,7 +58,7 @@ final class RenderedStrokeViewController: UIViewController, CanvasModelWatcherDe
             locations.append(l)
         }
         let s = Stroke(points: locations)
-        strokeInputHandler?.updateStroke(stroke: s)
+        canvasViewModel.updateStroke(stroke: s)
     }
 
     override func touchesEnded(_ touches: Set<UITouch>, with _: UIEvent?) {
@@ -83,7 +68,7 @@ final class RenderedStrokeViewController: UIViewController, CanvasModelWatcherDe
         }
 
         let s = Stroke(points: locations)
-        strokeInputHandler?.endStroke(stroke: s)
+        canvasViewModel.endStroke(stroke: s)
         locations.removeAll()
     }
 }
