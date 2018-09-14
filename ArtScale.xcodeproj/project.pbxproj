@@ -130,7 +130,7 @@
 			children = (
 				91BC979B2149C54D00A52161 /* Cartfile */,
 				91913A8021488C60005D9108 /* App */,
-				91913A7F21488C0F005D9108 /* Views and View Controllers */,
+				91913A7F21488C0F005D9108 /* Views */,
 				91913A7E21488BD7005D9108 /* Models */,
 				9142564C211BBBCB00786E4E /* Info.plist */,
 				91425647211BBBCB00786E4E /* Assets.xcassets */,
@@ -166,14 +166,14 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		91913A7F21488C0F005D9108 /* Views and View Controllers */ = {
+		91913A7F21488C0F005D9108 /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				915CF3C4211BCA6000056709 /* CanvasView.swift */,
 				913EE427212231950037B667 /* CanvasViewController.swift */,
 				91913A86214B25F2005D9108 /* CanvasViewModel.swift */,
 			);
-			path = "Views and View Controllers";
+			path = Views;
 			sourceTree = "<group>";
 		};
 		91913A8021488C60005D9108 /* App */ = {

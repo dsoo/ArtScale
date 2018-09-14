@@ -15,7 +15,7 @@ import UIKit
 protocol RenderedStrokeDataSource {}
 
 class CanvasView: UIView {
-    var renderedStrokes: [Stroke] = []
+    weak var canvasViewModel: CanvasViewModel?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -38,7 +38,9 @@ class CanvasView: UIView {
         context.setStrokeColor(color.cgColor)
 
         // Iterate through renderedStrokes and draw the lines
-        for stroke in renderedStrokes {
+        // FIXME: Probably just need a guard around canvasViewModel, or to understand how to guarantee a canvasViewModel
+        let renderedStrokes = canvasViewModel != nil ? canvasViewModel?.renderedStrokes : []
+        for stroke in (renderedStrokes)! {
             var first = true
             for point in stroke.points {
                 if !first {

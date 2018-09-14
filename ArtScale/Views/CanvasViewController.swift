@@ -13,7 +13,7 @@
 import CleanroomLogger
 import UIKit
 
-final class CanvasViewController: UIViewController, CanvasViewModelDelegate {
+final class CanvasViewController: UIViewController {
     @IBOutlet var canvasView: CanvasView!
     private var canvasViewModel: CanvasViewModel = CanvasViewModel()
 
@@ -32,6 +32,7 @@ final class CanvasViewController: UIViewController, CanvasViewModelDelegate {
         super.viewDidLoad()
         Log.info?.trace()
         canvasViewModel.canvasView = canvasView
+        canvasView.canvasViewModel = canvasViewModel
     }
 
     override func didReceiveMemoryWarning() {

@@ -9,29 +9,31 @@
 import Foundation
 import CleanroomLogger
 
-protocol CanvasViewModelDelegate {
-}
-
 class CanvasViewModel: CanvasModelDelegate {
     weak var canvasView: CanvasView?
-    private let canvasModel = CanvasModel()
+    private var canvasModel: CanvasModel
+    var renderedStrokes: [Stroke] = []
 
     init() {
+        canvasModel = CanvasModel()
         canvasModel.delegate = self
     }
 
     //
-    // Stroke updates
+    // View data update methods
     //
+
+    // CanvasModelDelegate implementation
     func canvasUpdated() {
         // Transform the "abstract" strokes coming from the model into "rendering strokes"
         // Tell the UI to redraw based on the rendering strokes in the controller
         // FIXME: Being lazy and just directly passing stroke data to renderer for now
-        canvasView?.renderedStrokes = canvasModel.allStrokes()
+        renderedStrokes = canvasModel.allStrokes()
         Log.info?.trace()
         canvasView?.setNeedsDisplay()
     }
 
+    // Model mutation methods
     func startStroke(stroke _: Stroke) {}
 
     func updateStroke(stroke _: Stroke) {}
