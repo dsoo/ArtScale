@@ -9,26 +9,29 @@
 import Foundation
 import CleanroomLogger
 
-class CanvasViewModel: CanvasModelDelegate {
+class CanvasViewModel: CanvasModelLocalDelegate {
     weak var canvasView: CanvasView?
-    private var canvasModel: CanvasModel
+    private var canvasModel: CanvasModel?
     var renderedStrokes: [Stroke] = []
 
     init() {
-        canvasModel = CanvasModel.shared
-        canvasModel.delegates.append(self)
+    }
+    
+    public func configure(canvasModel: CanvasModel) {
+        self.canvasModel = canvasModel
+        canvasModel.localDelegates.append(self)
     }
 
     //
     // View data update methods
     //
 
-    // CanvasModelDelegate implementation
-    func canvasUpdated() {
+    // CanvasModelLocalDelegate implementation
+    func updated() {
         // Transform the "abstract" strokes coming from the model into "rendering strokes"
         // Tell the UI to redraw based on the rendering strokes in the controller
         // FIXME: Being lazy and just directly passing stroke data to renderer for now
-        renderedStrokes = canvasModel.allStrokes()
+        renderedStrokes = canvasModel?.allStrokes() ?? []
         Log.info?.trace()
         canvasView?.setNeedsDisplay()
     }
@@ -40,6 +43,6 @@ class CanvasViewModel: CanvasModelDelegate {
 
     func endStroke(stroke: Stroke) {
         Log.info?.trace()
-        canvasModel.addStroke(stroke: stroke)
+        canvasModel?.addStroke(stroke: stroke)
     }
 }

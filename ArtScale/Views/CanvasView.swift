@@ -44,10 +44,10 @@ class CanvasView: UIView {
             var first = true
             for point in stroke.points {
                 if !first {
-                    context.addLine(to: point)
+                    context.addLine(to: CGPoint(x:point.x, y:point.y))
                 } else {
                     context.beginPath()
-                    context.move(to: point)
+                    context.move(to: CGPoint(x:point.x, y:point.y))
                     first = false
                 }
             }

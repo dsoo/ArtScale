@@ -15,9 +15,9 @@ import UIKit
 
 final class CanvasViewController: UIViewController {
     @IBOutlet var canvasView: CanvasView!
-    private var canvasViewModel: CanvasViewModel = CanvasViewModel()
+    var canvasViewModel: CanvasViewModel = CanvasViewModel()
 
-    private var locations: [CGPoint] = []
+    private var stroke = Stroke(points:[])
 
     @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
@@ -45,31 +45,30 @@ final class CanvasViewController: UIViewController {
     //
     override func touchesBegan(_ touches: Set<UITouch>, with _: UIEvent?) {
         Log.info?.trace()
+        stroke.points = []
         for touch in touches {
             let l = touch.location(in: canvasView)
-            locations.append(l)
+            stroke.points.append(Point(x:Double(l.x), y:Double(l.y)))
         }
-        let s = Stroke(points: locations)
-        canvasViewModel.startStroke(stroke: s)
+
+        canvasViewModel.startStroke(stroke: stroke)
     }
 
     override func touchesMoved(_ touches: Set<UITouch>, with _: UIEvent?) {
         for touch in touches {
             let l = touch.location(in: canvasView)
-            locations.append(l)
+            stroke.points.append(Point(x:Double(l.x), y:Double(l.y)))
         }
-        let s = Stroke(points: locations)
-        canvasViewModel.updateStroke(stroke: s)
+        canvasViewModel.updateStroke(stroke: stroke)
     }
 
     override func touchesEnded(_ touches: Set<UITouch>, with _: UIEvent?) {
         for touch in touches {
             let l = touch.location(in: canvasView)
-            locations.append(l)
+            stroke.points.append(Point(x:Double(l.x), y:Double(l.y)))
         }
 
-        let s = Stroke(points: locations)
-        canvasViewModel.endStroke(stroke: s)
-        locations.removeAll()
+        canvasViewModel.endStroke(stroke: stroke)
+        stroke.points = []
     }
 }

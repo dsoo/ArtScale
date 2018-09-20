@@ -13,7 +13,7 @@
         <!--MultiViewController-->
         <scene sceneID="ZuI-vH-0Ph">
             <objects>
-                <viewController title="MultiViewController" id="Up1-XU-f4F" customClass="BaseViewController" sceneMemberID="viewController">
+                <viewController title="MultiViewController" id="Up1-XU-f4F" customClass="MultiViewController" customModule="ArtScale" customModuleProvider="target" sceneMemberID="viewController">
                     <stackView key="view" opaque="NO" contentMode="scaleToFill" distribution="fillEqually" id="WBO-hN-LI6">
                         <rect key="frame" x="0.0" y="0.0" width="1112" height="834"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -38,10 +38,10 @@
             </objects>
             <point key="canvasLocation" x="136.51079136690649" y="831.65467625899282"/>
         </scene>
-        <!--Canvas View Controller-->
+        <!--LeftCanvas-->
         <scene sceneID="c1T-B9-NmT">
             <objects>
-                <viewController storyboardIdentifier="leftCanvasViewController" id="oit-eW-FCt" customClass="CanvasViewController" customModule="ArtScale" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="leftCanvasViewController" title="LeftCanvas" id="oit-eW-FCt" customClass="CanvasViewController" customModule="ArtScale" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="YLe-Yt-aa1" customClass="CanvasView" customModule="ArtScale" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="556" height="834"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -55,10 +55,10 @@
             </objects>
             <point key="canvasLocation" x="470" y="1565"/>
         </scene>
-        <!--Canvas View Controller-->
+        <!--RightCanvas-->
         <scene sceneID="bI2-qo-5mx">
             <objects>
-                <viewController storyboardIdentifier="rightCanvasViewController" id="8PF-kx-C2K" customClass="CanvasViewController" customModule="ArtScale" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="rightCanvasViewController" title="RightCanvas" id="8PF-kx-C2K" customClass="CanvasViewController" customModule="ArtScale" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Dcm-M1-IZb" customClass="CanvasView" customModule="ArtScale" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="556" height="834"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
