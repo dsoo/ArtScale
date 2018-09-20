@@ -15,8 +15,8 @@ class CanvasViewModel: CanvasModelDelegate {
     var renderedStrokes: [Stroke] = []
 
     init() {
-        canvasModel = CanvasModel()
-        canvasModel.delegate = self
+        canvasModel = CanvasModel.shared
+        canvasModel.delegates.append(self)
     }
 
     //

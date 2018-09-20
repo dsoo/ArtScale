@@ -10,7 +10,6 @@ import CleanroomLogger
 import UIKit
 
 final class MultiViewController: UIViewController {
-    
     @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)

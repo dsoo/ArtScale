@@ -26,7 +26,9 @@ protocol CanvasModelDelegate: class {
 }
 
 class CanvasModel {
-    weak var delegate: CanvasModelDelegate?
+    static let shared = CanvasModel()
+    
+    var delegates: [CanvasModelDelegate] = []
 
     private var strokes: [Stroke] = []
 
@@ -36,6 +38,9 @@ class CanvasModel {
 
     func addStroke(stroke: Stroke) {
         strokes.append(stroke)
-        delegate?.canvasUpdated()
+        // Send update to anything listening.
+        for delegate in delegates {
+            delegate.canvasUpdated()
+        }
     }
 }
