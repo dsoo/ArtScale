@@ -46,7 +46,7 @@ final class CanvasViewController: UIViewController {
     override func touchesBegan(_ touches: Set<UITouch>, with _: UIEvent?) {
         Log.info?.trace()
         for touch in touches {
-            let l = touch.location(in: nil)
+            let l = touch.location(in: canvasView)
             locations.append(l)
         }
         let s = Stroke(points: locations)
@@ -55,7 +55,7 @@ final class CanvasViewController: UIViewController {
 
     override func touchesMoved(_ touches: Set<UITouch>, with _: UIEvent?) {
         for touch in touches {
-            let l = touch.location(in: nil)
+            let l = touch.location(in: canvasView)
             locations.append(l)
         }
         let s = Stroke(points: locations)
@@ -64,7 +64,7 @@ final class CanvasViewController: UIViewController {
 
     override func touchesEnded(_ touches: Set<UITouch>, with _: UIEvent?) {
         for touch in touches {
-            let l = touch.location(in: nil)
+            let l = touch.location(in: canvasView)
             locations.append(l)
         }
 

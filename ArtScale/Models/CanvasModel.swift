@@ -13,6 +13,14 @@ struct Stroke {
     var points: [CGPoint]
 }
 
+struct Layer {
+    var strokes: [Stroke]
+}
+
+struct Canvas {
+    var layers: [Layer]
+}
+
 protocol CanvasModelDelegate: class {
     func canvasUpdated()
 }

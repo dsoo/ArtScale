@@ -1,30 +1,73 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Up1-XU-f4F">
     <device id="ipad10_5" orientation="landscape">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Canvas View Controller-->
-        <scene sceneID="tne-QT-ifu">
+        <!--MultiViewController-->
+        <scene sceneID="ZuI-vH-0Ph">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="CanvasViewController" customModule="ArtScale" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC" customClass="CanvasView" customModule="ArtScale" customModuleProvider="target">
+                <viewController title="MultiViewController" id="Up1-XU-f4F" customClass="BaseViewController" sceneMemberID="viewController">
+                    <stackView key="view" opaque="NO" contentMode="scaleToFill" distribution="fillEqually" id="WBO-hN-LI6">
                         <rect key="frame" x="0.0" y="0.0" width="1112" height="834"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R8w-CR-yKN">
+                                <rect key="frame" x="0.0" y="0.0" width="556" height="834"/>
+                                <connections>
+                                    <segue destination="oit-eW-FCt" kind="embed" id="Rq7-Gx-pNq"/>
+                                </connections>
+                            </containerView>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HFE-Wn-QwO">
+                                <rect key="frame" x="556" y="0.0" width="556" height="834"/>
+                                <connections>
+                                    <segue destination="8PF-kx-C2K" kind="embed" id="G7K-wG-8z3"/>
+                                </connections>
+                            </containerView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="G3c-IV-z1N"/>
+                    </stackView>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Eet-UP-XJZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="136.51079136690649" y="831.65467625899282"/>
+        </scene>
+        <!--Canvas View Controller-->
+        <scene sceneID="c1T-B9-NmT">
+            <objects>
+                <viewController storyboardIdentifier="leftCanvasViewController" id="oit-eW-FCt" customClass="CanvasViewController" customModule="ArtScale" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="YLe-Yt-aa1" customClass="CanvasView" customModule="ArtScale" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="556" height="834"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
                     <connections>
-                        <outlet property="canvasView" destination="8bC-Xf-vdC" id="BeO-yc-Ynb"/>
+                        <outlet property="canvasView" destination="YLe-Yt-aa1" id="ols-Fb-gpF"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CL1-vj-He1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+        </scene>
+        <!--Canvas View Controller-->
+        <scene sceneID="bI2-qo-5mx">
+            <objects>
+                <viewController storyboardIdentifier="rightCanvasViewController" id="8PF-kx-C2K" customClass="CanvasViewController" customModule="ArtScale" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Dcm-M1-IZb" customClass="CanvasView" customModule="ArtScale" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="556" height="834"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
+                    <connections>
+                        <outlet property="canvasView" destination="Dcm-M1-IZb" id="9pQ-XZ-e4s"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gqR-yV-Hzg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
         </scene>
     </scenes>

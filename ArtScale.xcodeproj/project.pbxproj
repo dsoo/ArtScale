@@ -22,6 +22,7 @@
 		91BC979E2149C74F00A52161 /* CleanroomLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91BC979D2149C74F00A52161 /* CleanroomLogger.framework */; };
 		91BC979F2149C74F00A52161 /* CleanroomLogger.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 91BC979D2149C74F00A52161 /* CleanroomLogger.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		91BC97A22149C98E00A52161 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 91BC97A12149C98E00A52161 /* .gitignore */; };
+		91CCAC0C215431AF00E0322E /* MultiViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CCAC0B215431AF00E0322E /* MultiViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,6 +77,7 @@
 		91BC979B2149C54D00A52161 /* Cartfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile; sourceTree = SOURCE_ROOT; };
 		91BC979D2149C74F00A52161 /* CleanroomLogger.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CleanroomLogger.framework; path = Carthage/Build/iOS/CleanroomLogger.framework; sourceTree = "<group>"; };
 		91BC97A12149C98E00A52161 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = SOURCE_ROOT; };
+		91CCAC0B215431AF00E0322E /* MultiViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,6 +171,7 @@
 		91913A7F21488C0F005D9108 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				91CCAC0B215431AF00E0322E /* MultiViewController.swift */,
 				915CF3C4211BCA6000056709 /* CanvasView.swift */,
 				913EE427212231950037B667 /* CanvasViewController.swift */,
 				91913A86214B25F2005D9108 /* CanvasViewModel.swift */,
@@ -255,13 +258,16 @@
 				TargetAttributes = {
 					9142563C211BBBCB00786E4E = {
 						CreatedOnToolsVersion = 9.4.1;
+						LastSwiftMigration = 1000;
 					};
 					91425650211BBBCB00786E4E = {
 						CreatedOnToolsVersion = 9.4.1;
+						LastSwiftMigration = 1000;
 						TestTargetID = 9142563C211BBBCB00786E4E;
 					};
 					9142565B211BBBCB00786E4E = {
 						CreatedOnToolsVersion = 9.4.1;
+						LastSwiftMigration = 1000;
 						TestTargetID = 9142563C211BBBCB00786E4E;
 					};
 				};
@@ -325,6 +331,7 @@
 				915CF3C5211BCA6000056709 /* CanvasView.swift in Sources */,
 				91425641211BBBCB00786E4E /* AppDelegate.swift in Sources */,
 				913EE428212231950037B667 /* CanvasViewController.swift in Sources */,
+				91CCAC0C215431AF00E0322E /* MultiViewController.swift in Sources */,
 				91913A87214B25F2005D9108 /* CanvasViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -511,7 +518,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.scalableinterfaces.ArtScale;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -533,7 +540,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.scalableinterfaces.ArtScale;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -553,7 +560,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.scalableinterfaces.ArtScaleTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ArtScale.app/ArtScale";
 			};
@@ -574,7 +581,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.scalableinterfaces.ArtScaleTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ArtScale.app/ArtScale";
 			};
@@ -594,7 +601,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.scalableinterfaces.ArtScaleUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = ArtScale;
 			};
@@ -614,7 +621,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.scalableinterfaces.ArtScaleUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = ArtScale;
 			};
