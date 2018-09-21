@@ -38,10 +38,10 @@
             </objects>
             <point key="canvasLocation" x="136.51079136690649" y="831.65467625899282"/>
         </scene>
-        <!--LeftCanvas-->
+        <!--RightCanvas-->
         <scene sceneID="c1T-B9-NmT">
             <objects>
-                <viewController storyboardIdentifier="leftCanvasViewController" title="LeftCanvas" id="oit-eW-FCt" customClass="CanvasViewController" customModule="ArtScale" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="leftCanvasViewController" title="RightCanvas" id="oit-eW-FCt" customClass="CanvasViewController" customModule="ArtScale" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="YLe-Yt-aa1" customClass="CanvasView" customModule="ArtScale" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="556" height="834"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -55,10 +55,10 @@
             </objects>
             <point key="canvasLocation" x="470" y="1565"/>
         </scene>
-        <!--RightCanvas-->
+        <!--LeftCanvas-->
         <scene sceneID="bI2-qo-5mx">
             <objects>
-                <viewController storyboardIdentifier="rightCanvasViewController" title="RightCanvas" id="8PF-kx-C2K" customClass="CanvasViewController" customModule="ArtScale" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="rightCanvasViewController" title="LeftCanvas" id="8PF-kx-C2K" customClass="CanvasViewController" customModule="ArtScale" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Dcm-M1-IZb" customClass="CanvasView" customModule="ArtScale" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="556" height="834"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

@@ -23,8 +23,9 @@ final class MultiViewController: UIViewController {
         super.viewDidLoad()
         Log.info?.trace()
         
-        let left = self.children[0] as! CanvasViewController
-        let right = self.children[1] as! CanvasViewController
+        let left = self.children[1] as! CanvasViewController
+        let right = self.children[0] as! CanvasViewController
+
         let leftCM = CanvasModel()
         let rightCM = CanvasModel()
         leftCM.serializedDelegates.append(rightCM)

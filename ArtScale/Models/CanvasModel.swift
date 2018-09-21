@@ -48,10 +48,6 @@ class CanvasModel: CanvasModelSerializedDelegate {
 
     private var strokes: [Stroke] = []
 
-    func stateUpdate() -> CanvasModelStateUpdate {
-        return CanvasModelStateUpdate(canvasState:strokes)
-    }
-    
     func allStrokes() -> [Stroke] {
         return strokes
     }
@@ -68,6 +64,10 @@ class CanvasModel: CanvasModelSerializedDelegate {
         for delegate in serializedDelegates {
             delegate.update(stateUpdate: stateUpdate)
         }
+    }
+    
+    func stateUpdate() -> CanvasModelStateUpdate {
+        return CanvasModelStateUpdate(canvasState:strokes)
     }
     
     func update(stateUpdate: CanvasModelStateUpdate) {
