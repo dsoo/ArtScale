@@ -14,15 +14,15 @@ final class MultiViewController: UIViewController {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-    
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         Log.info?.trace()
-        
+
         let left = self.children[1] as! CanvasViewController
         let right = self.children[0] as! CanvasViewController
 
@@ -32,9 +32,9 @@ final class MultiViewController: UIViewController {
         rightCM.serializedDelegates.append(leftCM)
 
         left.canvasViewModel.configure(canvasModel: leftCM)
-        right.canvasViewModel.configure(canvasModel: rightCM)        
+        right.canvasViewModel.configure(canvasModel: rightCM)
     }
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

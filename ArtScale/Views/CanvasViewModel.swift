@@ -16,7 +16,7 @@ class CanvasViewModel: CanvasModelLocalDelegate {
 
     init() {
     }
-    
+
     public func configure(canvasModel: CanvasModel) {
         self.canvasModel = canvasModel
         canvasModel.localDelegates.append(self)

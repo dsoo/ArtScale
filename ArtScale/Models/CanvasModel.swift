@@ -42,7 +42,7 @@ protocol CanvasModelSerializedDelegate: class {
 
 class CanvasModel: CanvasModelSerializedDelegate {
     static let shared = CanvasModel()
-    
+
     var localDelegates: [CanvasModelLocalDelegate] = []
     var serializedDelegates: [CanvasModelSerializedDelegate] = []
 
@@ -58,18 +58,18 @@ class CanvasModel: CanvasModelSerializedDelegate {
         for delegate in localDelegates {
             delegate.updated()
         }
-        
+
         // Send update to serialized delegates
         let stateUpdate = self.stateUpdate()
         for delegate in serializedDelegates {
             delegate.update(stateUpdate: stateUpdate)
         }
     }
-    
+
     func stateUpdate() -> CanvasModelStateUpdate {
-        return CanvasModelStateUpdate(canvasState:strokes)
+        return CanvasModelStateUpdate(canvasState: strokes)
     }
-    
+
     func update(stateUpdate: CanvasModelStateUpdate) {
         Log.info?.value(stateUpdate)
         strokes = stateUpdate.canvasState
