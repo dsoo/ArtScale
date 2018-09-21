@@ -9,20 +9,20 @@
 import CleanroomLogger
 import Foundation
 
-struct Point {
+struct Point: Codable {
     var x: Double
     var y: Double
 }
 
-struct Stroke {
+struct Stroke: Codable {
     var points: [Point]
 }
 
-struct Layer {
+struct Layer: Codable {
     var strokes: [Stroke]
 }
 
-struct Canvas {
+struct Canvas: Codable {
     var layers: [Layer]
 }
 
@@ -37,7 +37,7 @@ protocol CanvasModelLocalDelegate: class {
 
 // Delegate that gets serialized updates
 protocol CanvasModelSerializedDelegate: class {
-    func update(stateUpdate: CanvasModelStateUpdate)
+    func update(stateUpdate: String)
 }
 
 class CanvasModel: CanvasModelSerializedDelegate {
@@ -66,13 +66,29 @@ class CanvasModel: CanvasModelSerializedDelegate {
         }
     }
 
-    func stateUpdate() -> CanvasModelStateUpdate {
-        return CanvasModelStateUpdate(canvasState: strokes)
+    func stateUpdate() -> String {
+        do {
+            let jsonEncoder = JSONEncoder()
+            let jsonData = try jsonEncoder.encode(strokes)
+            let jsonString = String(data: jsonData, encoding: .utf8)
+            Log.info?.value(jsonString)
+            return jsonString ?? "{}"
+        }
+        catch {
+            return "{}"
+        }
     }
 
-    func update(stateUpdate: CanvasModelStateUpdate) {
+    func update(stateUpdate: String) {
         Log.info?.value(stateUpdate)
-        strokes = stateUpdate.canvasState
+
+        let jsonDecoder = JSONDecoder()
+        let jsonData = stateUpdate.data(using:.utf8)!
+        do {
+            strokes = try jsonDecoder.decode([Stroke].self, from: jsonData)
+        } catch {
+            Log.error?.message("Failed to decode JSON string!")
+        }
         for delegate in localDelegates {
             delegate.updated()
         }
