@@ -67,6 +67,7 @@ class CanvasModel: CanvasModelSerializedDelegate {
     }
 
     func stateUpdate() -> String {
+        // FIXME: Error handling!
         do {
             let jsonEncoder = JSONEncoder()
             let jsonData = try jsonEncoder.encode(strokes)
@@ -80,6 +81,7 @@ class CanvasModel: CanvasModelSerializedDelegate {
     }
 
     func update(stateUpdate: String) {
+        // FIXME: Error handling!
         Log.info?.value(stateUpdate)
 
         let jsonDecoder = JSONDecoder()
