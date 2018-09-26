@@ -32,7 +32,6 @@ class CanvasViewModel: CanvasModelLocalDelegate {
         // Tell the UI to redraw based on the rendering strokes in the controller
         // FIXME: Being lazy and just directly passing stroke data to renderer for now
         renderedStrokes = canvasModel?.allStrokes() ?? []
-        Log.info?.trace()
         canvasView?.setNeedsDisplay()
     }
 
@@ -42,7 +41,6 @@ class CanvasViewModel: CanvasModelLocalDelegate {
     func updateStroke(stroke _: Stroke) {}
 
     func endStroke(stroke: Stroke) {
-        Log.info?.trace()
         canvasModel?.addStroke(stroke: stroke)
     }
 }

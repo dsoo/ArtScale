@@ -18,16 +18,39 @@ struct Stroke: Codable {
     var points: [Point]
 }
 
-struct Layer: Codable {
+class Layer: Codable {
     var strokes: [Stroke]
+    init() {
+        strokes = []
+    }
+    
+    func addStroke(_ stroke: Stroke) {
+        strokes.append(stroke)
+    }
 }
 
-struct Canvas: Codable {
+class Canvas: Codable {
     var layers: [Layer]
-}
+    
+    init() {
+        layers = []
+    }
+    
+    // Add stroke to latest layer
+    func addStroke(_ stroke: Stroke) {
+        if layers.count == 0 {
+            layers.append(Layer())
+        }
+        layers[0].addStroke(stroke)
+    }
 
-struct CanvasModelStateUpdate {
-    var canvasState: [Stroke]
+    func allStrokes() -> [Stroke] {
+        var allStrokes:[Stroke] = []
+        for layer in layers {
+            allStrokes.append(contentsOf: layer.strokes)
+        }
+        return allStrokes
+    }
 }
 
 // Local delegate that has full access to the state
@@ -41,19 +64,13 @@ protocol CanvasModelSerializedDelegate: class {
 }
 
 class CanvasModel: CanvasModelSerializedDelegate {
-    static let shared = CanvasModel()
-
     var localDelegates: [CanvasModelLocalDelegate] = []
     var serializedDelegates: [CanvasModelSerializedDelegate] = []
 
-    private var strokes: [Stroke] = []
-
-    func allStrokes() -> [Stroke] {
-        return strokes
-    }
+    private var canvas = Canvas()
 
     func addStroke(stroke: Stroke) {
-        strokes.append(stroke)
+        canvas.addStroke(stroke)
         // Send update to local delegates.
         for delegate in localDelegates {
             delegate.updated()
@@ -70,24 +87,28 @@ class CanvasModel: CanvasModelSerializedDelegate {
         // FIXME: Error handling!
         do {
             let jsonEncoder = JSONEncoder()
-            let jsonData = try jsonEncoder.encode(strokes)
+            let jsonData = try jsonEncoder.encode(canvas)
             let jsonString = String(data: jsonData, encoding: .utf8)
-            Log.info?.value(jsonString)
+//            Log.info?.value(jsonString)
             return jsonString ?? "{}"
         }
         catch {
             return "{}"
         }
     }
+    
+    func allStrokes() -> [Stroke] {
+        return canvas.allStrokes()
+    }
 
     func update(stateUpdate: String) {
         // FIXME: Error handling!
-        Log.info?.value(stateUpdate)
+//        Log.info?.value(stateUpdate)
 
         let jsonDecoder = JSONDecoder()
         let jsonData = stateUpdate.data(using:.utf8)!
         do {
-            strokes = try jsonDecoder.decode([Stroke].self, from: jsonData)
+            canvas = try jsonDecoder.decode(Canvas.self, from: jsonData)
         } catch {
             Log.error?.message("Failed to decode JSON string!")
         }

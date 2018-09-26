@@ -44,7 +44,6 @@ final class CanvasViewController: UIViewController {
     // Input handling
     //
     override func touchesBegan(_ touches: Set<UITouch>, with _: UIEvent?) {
-        Log.info?.trace()
         stroke.points = []
         for touch in touches {
             let l = touch.location(in: canvasView)
