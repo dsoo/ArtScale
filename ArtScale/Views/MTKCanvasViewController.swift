@@ -22,7 +22,7 @@ class MTKCanvasViewController: UIViewController, CanvasViewControllerProtocol {
         let device = MTLCreateSystemDefaultDevice()
         mtkView.device = device
         mtkView.colorPixelFormat = .bgra8Unorm
-        renderer = CanvasViewRenderer(view: mtkView, device: device!)
+        renderer = CanvasViewRenderer(view: mtkView, device: device!, canvasViewModel:canvasViewModel)
         mtkView.delegate = renderer
     }    
 }
