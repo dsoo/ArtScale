@@ -10,7 +10,9 @@ import MetalKit
 import UIKit
 import CleanroomLogger
 
-class MTKCanvasViewController: UIViewController, MTKViewDelegate {
+class MTKCanvasViewController: UIViewController, MTKViewDelegate, CanvasViewControllerProtocol {
+    var canvasViewModel: CanvasViewModel = CanvasViewModel()
+
     func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) {
         Log.info?.trace()
     }

@@ -14,9 +14,12 @@ import CleanroomLogger
 import UIKit
 
 protocol CanvasViewControllerProtocol {
+    // FIXME: Protocol should not expose this
+    
+    var canvasViewModel: CanvasViewModel {get}
 }
 
-final class CanvasViewController: UIViewController {
+final class CanvasViewController: UIViewController, CanvasViewControllerProtocol {
     @IBOutlet var canvasView: CanvasView!
     var canvasViewModel: CanvasViewModel = CanvasViewModel()
 
