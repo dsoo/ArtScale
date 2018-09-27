@@ -28,7 +28,6 @@ class CanvasViewRenderer: NSObject, MTKViewDelegate {
     var pipelineState: MTLRenderPipelineState!
 
     init(view: MTKView, device: MTLDevice, canvasViewModel: CanvasViewModel) {
-        Log.info?.trace()
         self.mtkView = view
         self.device = device
         self.canvasViewModel = canvasViewModel
@@ -50,7 +49,6 @@ class CanvasViewRenderer: NSObject, MTKViewDelegate {
     }
 
     func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) {
-        Log.info?.value(size)
         screenProjectionMatrix = matrix_float4x4(columns: (simd_float4(x: Float(4.0/size.width), y: 0.0, z: 0.0, w: 0.0),
                                                            simd_float4(x: 0.0, y: Float(-4.0/size.height), z: 0.0, w: 0.0),
                                                            simd_float4(x: 0.0, y: 0.0, z: 1, w: 0),

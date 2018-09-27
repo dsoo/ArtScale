@@ -1,5 +1,5 @@
 //
-//  MultiViewController.swift
+//  AppViewController.swift
 //  ArtScale
 //
 //  Created by Douglas Soo on 9/20/18.
@@ -9,7 +9,7 @@
 import CleanroomLogger
 import UIKit
 
-final class MultiViewController: UIViewController {
+final class AppViewController: UIViewController {
     @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -22,8 +22,8 @@ final class MultiViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let left = self.children[0] as! CanvasViewControllerProtocol
-        let right = self.children[1] as! CanvasViewControllerProtocol
+        let left = self.children[0] as! CanvasViewController
+        let right = self.children[1] as! CanvasViewController
 
         let leftCM = CanvasModel()
         let rightCM = CanvasModel()

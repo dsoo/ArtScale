@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Up1-XU-f4F">
-    <device id="ipad10_5" orientation="landscape">
-        <adaptation id="fullscreen"/>
-    </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -13,19 +9,19 @@
         <!--MultiViewController-->
         <scene sceneID="ZuI-vH-0Ph">
             <objects>
-                <viewController title="MultiViewController" id="Up1-XU-f4F" customClass="MultiViewController" customModule="ArtScale" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="MultiViewController" id="Up1-XU-f4F" customClass="AppViewController" customModule="ArtScale" customModuleProvider="target" sceneMemberID="viewController">
                     <stackView key="view" opaque="NO" contentMode="scaleToFill" distribution="fillEqually" id="WBO-hN-LI6">
-                        <rect key="frame" x="0.0" y="0.0" width="1112" height="834"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HFE-Wn-QwO">
-                                <rect key="frame" x="0.0" y="0.0" width="556" height="834"/>
+                                <rect key="frame" x="0.0" y="0.0" width="300" height="600"/>
                                 <connections>
                                     <segue destination="8PF-kx-C2K" kind="embed" id="G7K-wG-8z3"/>
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R8w-CR-yKN">
-                                <rect key="frame" x="556" y="0.0" width="556" height="834"/>
+                                <rect key="frame" x="300" y="0.0" width="300" height="600"/>
                                 <connections>
                                     <segue destination="oit-eW-FCt" kind="embed" id="Rq7-Gx-pNq"/>
                                 </connections>
@@ -41,7 +37,7 @@
         <!--RightCanvas-->
         <scene sceneID="c1T-B9-NmT">
             <objects>
-                <viewController storyboardIdentifier="rightCanvasViewController" title="RightCanvas" id="oit-eW-FCt" customClass="MTKCanvasViewController" customModule="ArtScale" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="rightCanvasViewController" title="RightCanvas" id="oit-eW-FCt" customClass="CanvasViewController" customModule="ArtScale" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="YLe-Yt-aa1" customClass="MTKView">
                         <rect key="frame" x="0.0" y="0.0" width="556" height="834"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -59,7 +55,7 @@
         <!--LeftCanvas-->
         <scene sceneID="bI2-qo-5mx">
             <objects>
-                <viewController storyboardIdentifier="leftCanvasViewController" title="LeftCanvas" id="8PF-kx-C2K" customClass="MTKCanvasViewController" customModule="ArtScale" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="leftCanvasViewController" title="LeftCanvas" id="8PF-kx-C2K" customClass="CanvasViewController" customModule="ArtScale" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Dcm-M1-IZb" customClass="MTKView">
                         <rect key="frame" x="0.0" y="0.0" width="556" height="834"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

@@ -10,7 +10,6 @@
 		91080A8F215C61C2009C4CDE /* CanvasViewRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91080A8E215C61C2009C4CDE /* CanvasViewRenderer.swift */; };
 		91080A91215C636F009C4CDE /* Shaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 91080A90215C636F009C4CDE /* Shaders.metal */; };
 		913EE42421222F4E0037B667 /* CanvasModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913EE42321222F4E0037B667 /* CanvasModel.swift */; };
-		913EE428212231950037B667 /* CanvasViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913EE427212231950037B667 /* CanvasViewController.swift */; };
 		91425641211BBBCB00786E4E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91425640211BBBCB00786E4E /* AppDelegate.swift */; };
 		91425646211BBBCB00786E4E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 91425644211BBBCB00786E4E /* Main.storyboard */; };
 		91425648211BBBCB00786E4E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 91425647211BBBCB00786E4E /* Assets.xcassets */; };
@@ -24,8 +23,8 @@
 		91BC979E2149C74F00A52161 /* CleanroomLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91BC979D2149C74F00A52161 /* CleanroomLogger.framework */; };
 		91BC979F2149C74F00A52161 /* CleanroomLogger.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 91BC979D2149C74F00A52161 /* CleanroomLogger.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		91BC97A22149C98E00A52161 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 91BC97A12149C98E00A52161 /* .gitignore */; };
-		91CCAC0C215431AF00E0322E /* MultiViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CCAC0B215431AF00E0322E /* MultiViewController.swift */; };
-		91E4D88C215C31FC004C6A16 /* MTKCanvasViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91E4D88B215C31FC004C6A16 /* MTKCanvasViewController.swift */; };
+		91CCAC0C215431AF00E0322E /* AppViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CCAC0B215431AF00E0322E /* AppViewController.swift */; };
+		91E4D88C215C31FC004C6A16 /* CanvasViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91E4D88B215C31FC004C6A16 /* CanvasViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,7 +62,6 @@
 		91080A8E215C61C2009C4CDE /* CanvasViewRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasViewRenderer.swift; sourceTree = "<group>"; };
 		91080A90215C636F009C4CDE /* Shaders.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Shaders.metal; sourceTree = "<group>"; };
 		913EE42321222F4E0037B667 /* CanvasModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasModel.swift; sourceTree = "<group>"; };
-		913EE427212231950037B667 /* CanvasViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasViewController.swift; sourceTree = "<group>"; };
 		9142563D211BBBCB00786E4E /* ArtScale.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ArtScale.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		91425640211BBBCB00786E4E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		91425645211BBBCB00786E4E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -82,8 +80,8 @@
 		91BC979B2149C54D00A52161 /* Cartfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile; sourceTree = SOURCE_ROOT; };
 		91BC979D2149C74F00A52161 /* CleanroomLogger.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CleanroomLogger.framework; path = Carthage/Build/iOS/CleanroomLogger.framework; sourceTree = "<group>"; };
 		91BC97A12149C98E00A52161 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = SOURCE_ROOT; };
-		91CCAC0B215431AF00E0322E /* MultiViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiViewController.swift; sourceTree = "<group>"; };
-		91E4D88B215C31FC004C6A16 /* MTKCanvasViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MTKCanvasViewController.swift; sourceTree = "<group>"; };
+		91CCAC0B215431AF00E0322E /* AppViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppViewController.swift; sourceTree = "<group>"; };
+		91E4D88B215C31FC004C6A16 /* CanvasViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -177,11 +175,10 @@
 		91913A7F21488C0F005D9108 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				91CCAC0B215431AF00E0322E /* MultiViewController.swift */,
+				91CCAC0B215431AF00E0322E /* AppViewController.swift */,
 				915CF3C4211BCA6000056709 /* CanvasView.swift */,
-				913EE427212231950037B667 /* CanvasViewController.swift */,
 				91913A86214B25F2005D9108 /* CanvasViewModel.swift */,
-				91E4D88B215C31FC004C6A16 /* MTKCanvasViewController.swift */,
+				91E4D88B215C31FC004C6A16 /* CanvasViewController.swift */,
 				91080A8E215C61C2009C4CDE /* CanvasViewRenderer.swift */,
 				91080A90215C636F009C4CDE /* Shaders.metal */,
 			);
@@ -361,11 +358,10 @@
 				91080A8F215C61C2009C4CDE /* CanvasViewRenderer.swift in Sources */,
 				915CF3C5211BCA6000056709 /* CanvasView.swift in Sources */,
 				91425641211BBBCB00786E4E /* AppDelegate.swift in Sources */,
-				913EE428212231950037B667 /* CanvasViewController.swift in Sources */,
-				91CCAC0C215431AF00E0322E /* MultiViewController.swift in Sources */,
+				91CCAC0C215431AF00E0322E /* AppViewController.swift in Sources */,
 				91080A91215C636F009C4CDE /* Shaders.metal in Sources */,
 				91913A87214B25F2005D9108 /* CanvasViewModel.swift in Sources */,
-				91E4D88C215C31FC004C6A16 /* MTKCanvasViewController.swift in Sources */,
+				91E4D88C215C31FC004C6A16 /* CanvasViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
