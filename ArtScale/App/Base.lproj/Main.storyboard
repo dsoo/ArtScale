@@ -59,15 +59,15 @@
         <!--LeftCanvas-->
         <scene sceneID="bI2-qo-5mx">
             <objects>
-                <viewController storyboardIdentifier="leftCanvasViewController" title="LeftCanvas" id="8PF-kx-C2K" customClass="CanvasViewController" customModule="ArtScale" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Dcm-M1-IZb" customClass="CanvasView" customModule="ArtScale" customModuleProvider="target">
+                <viewController storyboardIdentifier="leftCanvasViewController" title="LeftCanvas" id="8PF-kx-C2K" customClass="MTKCanvasViewController" customModule="ArtScale" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Dcm-M1-IZb" customClass="MTKView">
                         <rect key="frame" x="0.0" y="0.0" width="556" height="834"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="par-JN-Fvz"/>
                     </view>
                     <connections>
-                        <outlet property="canvasView" destination="Dcm-M1-IZb" id="9pQ-XZ-e4s"/>
+                        <outlet property="mtkView" destination="Dcm-M1-IZb" id="XeE-es-eLn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gqR-yV-Hzg" userLabel="First Responder" sceneMemberID="firstResponder"/>
