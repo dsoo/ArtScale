@@ -15,7 +15,7 @@ import UIKit
 
 protocol CanvasViewControllerProtocol {
     // FIXME: Protocol should not expose this
-    
+
     var canvasViewModel: CanvasViewModel {get}
 }
 

@@ -205,6 +205,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 91425665211BBBCB00786E4E /* Build configuration list for PBXNativeTarget "ArtScale" */;
 			buildPhases = (
+				915491E8215D737D005912F7 /* ShellScript */,
 				91425639211BBBCB00786E4E /* Sources */,
 				9142563A211BBBCB00786E4E /* Frameworks */,
 				9142563B211BBBCB00786E4E /* Resources */,
@@ -330,6 +331,26 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		915491E8215D737D005912F7 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif which swiftlint >/dev/null; then\n    swiftlint autocorrect ArtScale*\nelse\n    echo \"warning: swiftlint not installed\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		91425639211BBBCB00786E4E /* Sources */ = {

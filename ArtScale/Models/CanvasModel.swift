@@ -23,7 +23,7 @@ class Layer: Codable {
     init() {
         strokes = []
     }
-    
+
     func addStroke(_ stroke: Stroke) {
         strokes.append(stroke)
     }
@@ -31,11 +31,11 @@ class Layer: Codable {
 
 class Canvas: Codable {
     var layers: [Layer]
-    
+
     init() {
         layers = []
     }
-    
+
     // Add stroke to latest layer
     func addStroke(_ stroke: Stroke) {
         if layers.count == 0 {
@@ -45,7 +45,7 @@ class Canvas: Codable {
     }
 
     func allStrokes() -> [Stroke] {
-        var allStrokes:[Stroke] = []
+        var allStrokes: [Stroke] = []
         for layer in layers {
             allStrokes.append(contentsOf: layer.strokes)
         }
@@ -91,12 +91,11 @@ class CanvasModel: CanvasModelSerializedDelegate {
             let jsonString = String(data: jsonData, encoding: .utf8)
 //            Log.info?.value(jsonString)
             return jsonString ?? "{}"
-        }
-        catch {
+        } catch {
             return "{}"
         }
     }
-    
+
     func allStrokes() -> [Stroke] {
         return canvas.allStrokes()
     }
@@ -106,7 +105,7 @@ class CanvasModel: CanvasModelSerializedDelegate {
 //        Log.info?.value(stateUpdate)
 
         let jsonDecoder = JSONDecoder()
-        let jsonData = stateUpdate.data(using:.utf8)!
+        let jsonData = stateUpdate.data(using: .utf8)!
         do {
             canvas = try jsonDecoder.decode(Canvas.self, from: jsonData)
         } catch {
