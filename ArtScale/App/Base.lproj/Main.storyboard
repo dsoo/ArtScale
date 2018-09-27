@@ -48,6 +48,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="gH8-wh-RpS"/>
                     </view>
+                    <connections>
+                        <outlet property="mtkView" destination="YLe-Yt-aa1" id="O9K-s2-f2C"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CL1-vj-He1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

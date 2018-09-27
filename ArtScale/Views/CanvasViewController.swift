@@ -36,7 +36,6 @@ final class CanvasViewController: UIViewController, CanvasViewControllerProtocol
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        Log.info?.trace()
         canvasViewModel.canvasView = canvasView
         canvasView.canvasViewModel = canvasViewModel
     }

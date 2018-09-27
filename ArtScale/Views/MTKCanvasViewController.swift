@@ -10,14 +10,20 @@ import MetalKit
 import UIKit
 import CleanroomLogger
 
-class MTKCanvasViewController: UIViewController, MTKViewDelegate, CanvasViewControllerProtocol {
+class MTKCanvasViewController: UIViewController, CanvasViewControllerProtocol {
+    @IBOutlet var mtkView: MTKView!
+    var renderer: CanvasViewRenderer!
+    
     var canvasViewModel: CanvasViewModel = CanvasViewModel()
-
-    func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) {
-        Log.info?.trace()
-    }
-    func draw(in view: MTKView) {
-        Log.info?.trace()
-    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        let device = MTLCreateSystemDefaultDevice()
+        mtkView.device = device
+        mtkView.colorPixelFormat = .bgra8Unorm
+        renderer = CanvasViewRenderer(view: mtkView, device: device!)
+        mtkView.delegate = renderer
+    }    
 }
 

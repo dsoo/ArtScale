@@ -21,7 +21,6 @@ final class MultiViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        Log.info?.trace()
 
         let left = self.children[0] as! CanvasViewControllerProtocol
         let right = self.children[1] as! CanvasViewControllerProtocol
