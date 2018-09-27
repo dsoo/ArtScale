@@ -23,8 +23,8 @@ final class MultiViewController: UIViewController {
         super.viewDidLoad()
         Log.info?.trace()
 
-        let left = self.children[1] as! CanvasViewController
-        let right = self.children[0] as! CanvasViewController
+        let left = self.children[0] as! CanvasViewController
+        let right = self.children[1] as! MTKCanvasViewController
 
         let leftCM = CanvasModel()
         let rightCM = CanvasModel()
@@ -32,7 +32,7 @@ final class MultiViewController: UIViewController {
         rightCM.serializedDelegates.append(leftCM)
 
         left.canvasViewModel.configure(canvasModel: leftCM)
-        right.canvasViewModel.configure(canvasModel: rightCM)
+//        right.canvasViewModel.configure(canvasModel: rightCM)
     }
 
     override func didReceiveMemoryWarning() {

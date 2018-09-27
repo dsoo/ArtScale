@@ -12,6 +12,9 @@ import UIKit
 //    let points: [CGPoint] = []
 // }
 
+protocol CanvasViewProtocol {
+}
+
 protocol RenderedStrokeDataSource {}
 
 class CanvasView: UIView {

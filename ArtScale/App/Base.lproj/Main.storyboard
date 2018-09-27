@@ -18,16 +18,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="1112" height="834"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R8w-CR-yKN">
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HFE-Wn-QwO">
                                 <rect key="frame" x="0.0" y="0.0" width="556" height="834"/>
                                 <connections>
-                                    <segue destination="oit-eW-FCt" kind="embed" id="Rq7-Gx-pNq"/>
+                                    <segue destination="8PF-kx-C2K" kind="embed" id="G7K-wG-8z3"/>
                                 </connections>
                             </containerView>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HFE-Wn-QwO">
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R8w-CR-yKN">
                                 <rect key="frame" x="556" y="0.0" width="556" height="834"/>
                                 <connections>
-                                    <segue destination="8PF-kx-C2K" kind="embed" id="G7K-wG-8z3"/>
+                                    <segue destination="oit-eW-FCt" kind="embed" id="Rq7-Gx-pNq"/>
                                 </connections>
                             </containerView>
                         </subviews>
@@ -41,15 +41,13 @@
         <!--RightCanvas-->
         <scene sceneID="c1T-B9-NmT">
             <objects>
-                <viewController storyboardIdentifier="leftCanvasViewController" title="RightCanvas" id="oit-eW-FCt" customClass="CanvasViewController" customModule="ArtScale" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="YLe-Yt-aa1" customClass="CanvasView" customModule="ArtScale" customModuleProvider="target">
+                <viewController storyboardIdentifier="rightCanvasViewController" title="RightCanvas" id="oit-eW-FCt" customClass="MTKCanvasViewController" customModule="ArtScale" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="YLe-Yt-aa1" customClass="MTKView">
                         <rect key="frame" x="0.0" y="0.0" width="556" height="834"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="gH8-wh-RpS"/>
                     </view>
-                    <connections>
-                        <outlet property="canvasView" destination="YLe-Yt-aa1" id="ols-Fb-gpF"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CL1-vj-He1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -58,11 +56,12 @@
         <!--LeftCanvas-->
         <scene sceneID="bI2-qo-5mx">
             <objects>
-                <viewController storyboardIdentifier="rightCanvasViewController" title="LeftCanvas" id="8PF-kx-C2K" customClass="CanvasViewController" customModule="ArtScale" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="leftCanvasViewController" title="LeftCanvas" id="8PF-kx-C2K" customClass="CanvasViewController" customModule="ArtScale" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Dcm-M1-IZb" customClass="CanvasView" customModule="ArtScale" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="556" height="834"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="par-JN-Fvz"/>
                     </view>
                     <connections>
                         <outlet property="canvasView" destination="Dcm-M1-IZb" id="9pQ-XZ-e4s"/>

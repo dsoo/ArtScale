@@ -13,6 +13,9 @@
 import CleanroomLogger
 import UIKit
 
+protocol CanvasViewControllerProtocol {
+}
+
 final class CanvasViewController: UIViewController {
     @IBOutlet var canvasView: CanvasView!
     var canvasViewModel: CanvasViewModel = CanvasViewModel()
