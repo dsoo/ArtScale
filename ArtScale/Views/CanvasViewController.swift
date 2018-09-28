@@ -12,38 +12,45 @@ import CleanroomLogger
 
 class CanvasViewController: UIViewController {
     @IBOutlet var mtkView: MTKView!
+
     var renderer: CanvasViewRenderer!
+    var device: MTLDevice?
 
     var canvasViewModel: CanvasViewModel = CanvasViewModel()
-    private var stroke = Stroke(points: [])
+    private var stroke = Stroke()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        let device = MTLCreateSystemDefaultDevice()
+        device = MTLCreateSystemDefaultDevice()
+        // FIXME: Is it okay to do this once per view?
         mtkView.device = device
         mtkView.colorPixelFormat = .bgra8Unorm
         renderer = CanvasViewRenderer(view: mtkView, device: device!, canvasViewModel: canvasViewModel)
+        canvasViewModel.renderer = renderer
         mtkView.delegate = renderer
+    }
+
+    func configure(device: MTLDevice?) {
+        Log.info?.trace()
+        self.device = device
     }
 
     //
     // Input handling
     //
     override func touchesBegan(_ touches: Set<UITouch>, with _: UIEvent?) {
-        stroke.points = []
+        stroke = Stroke()
         for touch in touches {
             let l = touch.location(in: mtkView)
-            stroke.points.append(Point(x: Double(l.x), y: Double(l.y)))
+            stroke.addPoint(x: Double(l.x), y: Double(l.y))
         }
-
         canvasViewModel.startStroke(stroke: stroke)
     }
 
     override func touchesMoved(_ touches: Set<UITouch>, with _: UIEvent?) {
         for touch in touches {
             let l = touch.location(in: mtkView)
-            stroke.points.append(Point(x: Double(l.x), y: Double(l.y)))
+            stroke.addPoint(x: Double(l.x), y: Double(l.y))
         }
         canvasViewModel.updateStroke(stroke: stroke)
     }
@@ -51,9 +58,8 @@ class CanvasViewController: UIViewController {
     override func touchesEnded(_ touches: Set<UITouch>, with _: UIEvent?) {
         for touch in touches {
             let l = touch.location(in: mtkView)
-            stroke.points.append(Point(x: Double(l.x), y: Double(l.y)))
+            stroke.addPoint(x: Double(l.x), y: Double(l.y))
         }
-
         canvasViewModel.endStroke(stroke: stroke)
-        stroke.points = []
+        stroke = Stroke()
     }}

@@ -10,8 +10,8 @@ import Foundation
 import CleanroomLogger
 
 class CanvasViewModel: CanvasModelLocalDelegate {
-    weak var canvasView: CanvasView?
     private var canvasModel: CanvasModel?
+    var renderer: CanvasViewRenderer?
     var renderedStrokes: [Stroke] = []
 
     init() {
@@ -32,7 +32,9 @@ class CanvasViewModel: CanvasModelLocalDelegate {
         // Tell the UI to redraw based on the rendering strokes in the controller
         // FIXME: Being lazy and just directly passing stroke data to renderer for now
         renderedStrokes = canvasModel?.allStrokes() ?? []
-        canvasView?.setNeedsDisplay()
+
+        // Update all of the renderer information
+        renderer?.updateVertexData()
     }
 
     // Model mutation methods

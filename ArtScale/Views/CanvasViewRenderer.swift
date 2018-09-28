@@ -14,11 +14,18 @@ struct Uniforms {
     var modelViewMatrix: float4x4
 }
 
+struct Primitive {
+    let start: Int
+    let length: Int
+}
+
 class CanvasViewRenderer: NSObject, MTKViewDelegate {
     let device: MTLDevice
     let mtkView: MTKView
     let canvasViewModel: CanvasViewModel
 
+    private var vertexBuffer: MTLBuffer?
+    private var primitives: [Primitive]
     private var screenProjectionMatrix = matrix_float4x4(columns: (simd_float4(x: 0.001, y: 0.0, z: 0.0, w: 0),
                                                                  simd_float4(x: 0.0, y: -0.001, z: 0.0, w: 0),
                                                                  simd_float4(x: 0.0, y: 0.0, z: 0.001, w: 0),
@@ -45,6 +52,9 @@ class CanvasViewRenderer: NSObject, MTKViewDelegate {
         } catch {
             Log.error?.message("Exception while building pipeline!")
         }
+
+//        self.vertexBuffer = device.makeBuffer(length: 0)!
+        self.primitives = []
         super.init()
     }
 
@@ -62,34 +72,39 @@ class CanvasViewRenderer: NSObject, MTKViewDelegate {
 
         // Iterate through renderedStrokes and draw the lines
         // FIXME: Probably just need a guard around canvasViewModel, or to understand how to guarantee a canvasViewModel
+
+        let uniformBuffer = device.makeBuffer(length: MemoryLayout<Float>.size * 16, options: [])
+        let bufferPointer = uniformBuffer!.contents()
+        memcpy(bufferPointer, &screenProjectionMatrix, MemoryLayout<Float>.size * 16)
+        encoder.setVertexBuffer(vertexBuffer, offset: 0, index: 0)
+        encoder.setVertexBuffer(uniformBuffer, offset: 0, index: 1)
+
+        encoder.setRenderPipelineState(pipelineState)
+        for primitive in primitives {
+            encoder.drawPrimitives(type: .lineStrip, vertexStart: primitive.start, vertexCount: primitive.length)
+        }
+        encoder.endEncoding()
+        commandBuffer.present(view.currentDrawable!)
+        commandBuffer.commit()
+    }
+
+    func updateVertexData() {
+        // Canvas data has been updated. Regenerate all vertex data
         let renderedStrokes = canvasViewModel.renderedStrokes
         var vertexData: [Float] = []
+
+        primitives = []
+        var offset = 0
         for stroke in renderedStrokes {
             for point in stroke.points {
                 vertexData.append(Float(point.x))
                 vertexData.append(Float(point.y))
                 vertexData.append(0.0)
             }
+            primitives.append(Primitive(start: offset, length: stroke.points.count))
+            offset += stroke.points.count
         }
 
-        encoder.setVertexBytes(vertexData, length: vertexData.count * MemoryLayout<Float>.stride, index: 0)
-
-        let uniformBuffer = device.makeBuffer(length: MemoryLayout<Float>.size * 16, options: [])
-        let bufferPointer = uniformBuffer!.contents()
-        memcpy(bufferPointer, &screenProjectionMatrix, MemoryLayout<Float>.size * 16)
-        encoder.setVertexBuffer(uniformBuffer, offset: 0, index: 1)
-
-        encoder.setRenderPipelineState(pipelineState)
-        if (vertexData.count > 0) {
-            var start = 0
-            for stroke in renderedStrokes {
-                let strokeLen = stroke.points.count
-                encoder.drawPrimitives(type: .lineStrip, vertexStart: start, vertexCount: strokeLen)
-                start += strokeLen
-            }
-        }
-        encoder.endEncoding()
-        commandBuffer.present(view.currentDrawable!)
-        commandBuffer.commit()
+        vertexBuffer = device.makeBuffer(bytes: vertexData, length: vertexData.count * MemoryLayout<Float>.stride)
     }
 }

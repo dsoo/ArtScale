@@ -9,17 +9,49 @@
 import CleanroomLogger
 import Foundation
 
-struct Point: Codable {
+class Point: Codable {
+    var date: Date
     var x: Double
     var y: Double
+    init(x: Double, y: Double) {
+        date = Date()
+        self.x = x
+        self.y = y
+    }
 }
 
-struct Stroke: Codable {
-    var points: [Point]
+class Style: Codable {
+    private(set) var params: String
+
+    init(params: String) {
+        self.params = params
+    }
+}
+
+class Stroke: Codable {
+    var id: UUID
+    var date: Date
+    private(set) var style: Style
+    private(set) var points: [Point]
+
+    init() {
+        date = Date()
+        id = UUID()
+        points = []
+        style = Style(params: "randColor")
+    }
+
+    func addPoint(x: Double, y: Double) {
+        self.addPoint(point: Point(x: x, y: y))
+    }
+
+    func addPoint(point: Point) {
+        self.points.append(point)
+    }
 }
 
 class Layer: Codable {
-    var strokes: [Stroke]
+    private(set) var strokes: [Stroke]
     init() {
         strokes = []
     }
@@ -89,7 +121,6 @@ class CanvasModel: CanvasModelSerializedDelegate {
             let jsonEncoder = JSONEncoder()
             let jsonData = try jsonEncoder.encode(canvas)
             let jsonString = String(data: jsonData, encoding: .utf8)
-//            Log.info?.value(jsonString)
             return jsonString ?? "{}"
         } catch {
             return "{}"
