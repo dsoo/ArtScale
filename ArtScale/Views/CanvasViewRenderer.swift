@@ -24,20 +24,19 @@ class CanvasViewRenderer: NSObject, MTKViewDelegate {
     let mtkView: MTKView
     let canvasViewModel: CanvasViewModel
 
+    private var uniformBuffer: MTLBuffer?
     private var vertexBuffer: MTLBuffer?
     private var primitives: [Primitive]
-    private var screenProjectionMatrix = matrix_float4x4(columns: (simd_float4(x: 0.001, y: 0.0, z: 0.0, w: 0),
-                                                                 simd_float4(x: 0.0, y: -0.001, z: 0.0, w: 0),
-                                                                 simd_float4(x: 0.0, y: 0.0, z: 0.001, w: 0),
-                                                                 simd_float4(x: 0.0, y: 0.0, z: 0.0, w: 1)))
+    private var screenProjectionMatrix = matrix_float4x4()
 
     let commandQueue: MTLCommandQueue!
     var pipelineState: MTLRenderPipelineState!
 
     init(view: MTKView, device: MTLDevice, canvasViewModel: CanvasViewModel) {
         self.mtkView = view
-        self.device = device
         self.canvasViewModel = canvasViewModel
+
+        self.device = device
         self.commandQueue = device.makeCommandQueue()!
         guard let library = device.makeDefaultLibrary() else {
             fatalError("Could not load default library from main bundle")
@@ -53,16 +52,13 @@ class CanvasViewRenderer: NSObject, MTKViewDelegate {
             Log.error?.message("Exception while building pipeline!")
         }
 
-//        self.vertexBuffer = device.makeBuffer(length: 0)!
+        self.uniformBuffer = device.makeBuffer(length: MemoryLayout<Float>.size * 16)
         self.primitives = []
         super.init()
     }
 
     func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) {
-        screenProjectionMatrix = matrix_float4x4(columns: (simd_float4(x: Float(4.0/size.width), y: 0.0, z: 0.0, w: 0.0),
-                                                           simd_float4(x: 0.0, y: Float(-4.0/size.height), z: 0.0, w: 0.0),
-                                                           simd_float4(x: 0.0, y: 0.0, z: 1, w: 0),
-                                                           simd_float4(x: -1.0, y: 1.0, z: 0.0, w: 1)))
+        updateProjection(width: Float(size.width), height: Float(size.height))
     }
 
     func draw(in view: MTKView) {
@@ -70,12 +66,6 @@ class CanvasViewRenderer: NSObject, MTKViewDelegate {
         guard let passDescriptor = view.currentRenderPassDescriptor else { return }
         guard let encoder = commandBuffer.makeRenderCommandEncoder(descriptor: passDescriptor) else { return }
 
-        // Iterate through renderedStrokes and draw the lines
-        // FIXME: Probably just need a guard around canvasViewModel, or to understand how to guarantee a canvasViewModel
-
-        let uniformBuffer = device.makeBuffer(length: MemoryLayout<Float>.size * 16, options: [])
-        let bufferPointer = uniformBuffer!.contents()
-        memcpy(bufferPointer, &screenProjectionMatrix, MemoryLayout<Float>.size * 16)
         encoder.setVertexBuffer(vertexBuffer, offset: 0, index: 0)
         encoder.setVertexBuffer(uniformBuffer, offset: 0, index: 1)
 
@@ -86,6 +76,15 @@ class CanvasViewRenderer: NSObject, MTKViewDelegate {
         encoder.endEncoding()
         commandBuffer.present(view.currentDrawable!)
         commandBuffer.commit()
+    }
+
+    func updateProjection(width: Float, height: Float) {
+        screenProjectionMatrix = matrix_float4x4(columns: (simd_float4(x: Float(4.0/width), y: 0.0, z: 0.0, w: 0.0),
+                                                           simd_float4(x: 0.0, y: Float(-4.0/height), z: 0.0, w: 0.0),
+                                                           simd_float4(x: 0.0, y: 0.0, z: 1, w: 0),
+                                                           simd_float4(x: -1.0, y: 1.0, z: 0.0, w: 1)))
+        let bufferPointer = uniformBuffer!.contents()
+        memcpy(bufferPointer, &screenProjectionMatrix, MemoryLayout<Float>.size * 16)
     }
 
     func updateVertexData() {
