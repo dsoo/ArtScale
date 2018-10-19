@@ -12,10 +12,15 @@ import UIKit
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
+    var canvasClient: CanvasClient?
+    var canvasServer: CanvasServer?
 
     func application(_: UIApplication, didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         Log.enable()
+
+        canvasClient = CanvasClient(name: "iPad Air 2")
+        canvasServer = CanvasServer()
         return true
     }
 

@@ -17,6 +17,9 @@
 		91425656211BBBCB00786E4E /* ArtScaleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91425655211BBBCB00786E4E /* ArtScaleTests.swift */; };
 		91425661211BBBCB00786E4E /* ArtScaleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91425660211BBBCB00786E4E /* ArtScaleUITests.swift */; };
 		915CF3C5211BCA6000056709 /* CanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915CF3C4211BCA6000056709 /* CanvasView.swift */; };
+		9160ED0E21793657004DF6A7 /* CanvasServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9160ED0D21793657004DF6A7 /* CanvasServer.swift */; };
+		9160ED1021793E1E004DF6A7 /* CanvasClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9160ED0F21793E1E004DF6A7 /* CanvasClient.swift */; };
+		9160ED122179A60F004DF6A7 /* Cartfile.resolved in Resources */ = {isa = PBXBuildFile; fileRef = 9160ED112179A60F004DF6A7 /* Cartfile.resolved */; };
 		91913A84214AD594005D9108 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 91913A83214AD594005D9108 /* .swiftlint.yml */; };
 		91913A87214B25F2005D9108 /* CanvasViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91913A86214B25F2005D9108 /* CanvasViewModel.swift */; };
 		91BC979C2149C54D00A52161 /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = 91BC979B2149C54D00A52161 /* Cartfile */; };
@@ -75,6 +78,9 @@
 		91425660211BBBCB00786E4E /* ArtScaleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtScaleUITests.swift; sourceTree = "<group>"; };
 		91425662211BBBCB00786E4E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		915CF3C4211BCA6000056709 /* CanvasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasView.swift; sourceTree = "<group>"; };
+		9160ED0D21793657004DF6A7 /* CanvasServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasServer.swift; sourceTree = "<group>"; };
+		9160ED0F21793E1E004DF6A7 /* CanvasClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasClient.swift; sourceTree = "<group>"; };
+		9160ED112179A60F004DF6A7 /* Cartfile.resolved */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile.resolved; sourceTree = SOURCE_ROOT; };
 		91913A83214AD594005D9108 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .swiftlint.yml; sourceTree = "<group>"; };
 		91913A86214B25F2005D9108 /* CanvasViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasViewModel.swift; sourceTree = "<group>"; };
 		91BC979B2149C54D00A52161 /* Cartfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile; sourceTree = SOURCE_ROOT; };
@@ -135,6 +141,7 @@
 			isa = PBXGroup;
 			children = (
 				91BC979B2149C54D00A52161 /* Cartfile */,
+				9160ED112179A60F004DF6A7 /* Cartfile.resolved */,
 				91913A8021488C60005D9108 /* App */,
 				91913A7F21488C0F005D9108 /* Views */,
 				91913A7E21488BD7005D9108 /* Models */,
@@ -191,6 +198,8 @@
 				91425644211BBBCB00786E4E /* Main.storyboard */,
 				91425649211BBBCB00786E4E /* LaunchScreen.storyboard */,
 				91425640211BBBCB00786E4E /* AppDelegate.swift */,
+				9160ED0D21793657004DF6A7 /* CanvasServer.swift */,
+				9160ED0F21793E1E004DF6A7 /* CanvasClient.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -305,6 +314,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				91913A84214AD594005D9108 /* .swiftlint.yml in Resources */,
+				9160ED122179A60F004DF6A7 /* Cartfile.resolved in Resources */,
 				91BC97A22149C98E00A52161 /* .gitignore in Resources */,
 				9142564B211BBBCB00786E4E /* LaunchScreen.storyboard in Resources */,
 				91425648211BBBCB00786E4E /* Assets.xcassets in Resources */,
@@ -356,9 +366,11 @@
 			files = (
 				913EE42421222F4E0037B667 /* CanvasModel.swift in Sources */,
 				91080A8F215C61C2009C4CDE /* CanvasViewRenderer.swift in Sources */,
+				9160ED0E21793657004DF6A7 /* CanvasServer.swift in Sources */,
 				915CF3C5211BCA6000056709 /* CanvasView.swift in Sources */,
 				91425641211BBBCB00786E4E /* AppDelegate.swift in Sources */,
 				91CCAC0C215431AF00E0322E /* AppViewController.swift in Sources */,
+				9160ED1021793E1E004DF6A7 /* CanvasClient.swift in Sources */,
 				91080A91215C636F009C4CDE /* Shaders.metal in Sources */,
 				91913A87214B25F2005D9108 /* CanvasViewModel.swift in Sources */,
 				91E4D88C215C31FC004C6A16 /* CanvasViewController.swift in Sources */,
@@ -541,6 +553,7 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = ArtScale/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -563,6 +576,7 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = ArtScale/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
