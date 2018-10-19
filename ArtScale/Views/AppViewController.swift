@@ -25,13 +25,10 @@ final class AppViewController: UIViewController {
         let left = self.children[0] as! CanvasViewController
         let right = self.children[1] as! CanvasViewController
 
-        let leftCM = CanvasModel()
-        let rightCM = CanvasModel()
-        leftCM.serializedDelegates.append(rightCM)
-        rightCM.serializedDelegates.append(leftCM)
+        let ad = UIApplication.shared.delegate as! AppDelegate
 
-        left.canvasViewModel.configure(canvasModel: leftCM)
-        right.canvasViewModel.configure(canvasModel: rightCM)
+        left.canvasViewModel.configure(canvasModel: ad.leftCM!)
+        right.canvasViewModel.configure(canvasModel: ad.rightCM!)
     }
 
     override func didReceiveMemoryWarning() {

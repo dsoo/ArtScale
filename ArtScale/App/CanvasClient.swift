@@ -10,15 +10,16 @@ import Foundation
 import Network
 import CleanroomLogger
 
-class CanvasClient {
+class CanvasClient: CanvasModelRemoteObserver {
     var connection: NWConnection
     var queue: DispatchQueue
     var connected: Bool = false
-    init(name: String) {
-        Log.info?.trace()
-        queue = DispatchQueue(label: "Canvas Client Queue")
+    var canvasModel: CanvasModel?
 
-//        connection = NWConnection(host:"192.168.1.138", port:49847, using: NWParameters.tcp)
+    init(name: String, canvasModel: CanvasModel) {
+        Log.info?.trace()
+
+        queue = DispatchQueue(label: "Canvas Client Queue")
         connection = NWConnection(to: NWEndpoint.service(name: name, type: "_canvas._tcp", domain: "local", interface: nil), using: NWParameters.tcp)
 
         connection.stateUpdateHandler = { [weak self] (newState) in
@@ -36,10 +37,10 @@ class CanvasClient {
                 Log.info?.message("Client failed with error: \(error)")
             case .waiting(let error):
                 Log.info?.message("Client waiting with error: \(error)")
-            default:
-                break
             }
         }
+
+        canvasModel.remoteObservers.append(self)
 
         connection.start(queue: queue)
     }
@@ -56,5 +57,9 @@ class CanvasClient {
                 Log.info?.message("Got connected - \(content!)!")
             }
         })
+    }
+
+    func canvasModelStateUpdate(canvasModel: CanvasModel, stateUpdate: String) {
+        // Send this update over the network to peers.
     }
 }

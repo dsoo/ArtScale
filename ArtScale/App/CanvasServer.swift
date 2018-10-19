@@ -10,7 +10,7 @@ import Foundation
 import Network
 import CleanroomLogger
 
-class CanvasServer {
+class CanvasServer: CanvasModelRemoteObserver {
     var listener: NWListener
     var queue: DispatchQueue
     var connected: Bool = false
@@ -69,5 +69,9 @@ class CanvasServer {
                 Log.info?.value(data)
             }
         })
+    }
+
+    func canvasModelStateUpdate(canvasModel: CanvasModel, stateUpdate: String) {
+        // Send update to connected cleints
     }
 }

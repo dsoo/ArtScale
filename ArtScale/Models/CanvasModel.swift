@@ -85,37 +85,42 @@ class Canvas: Codable {
     }
 }
 
-// Local delegate that has full access to the state
-protocol CanvasModelLocalDelegate: class {
-    func updated()
+protocol CanvasModelLocalObserver: class {
+    func canvasModelUpdate(canvasModel: CanvasModel)
+}
+
+protocol CanvasModelRemoteObserver: class {
+    // FIXME: Maybe should just have stateupdate
+    func canvasModelStateUpdate(canvasModel: CanvasModel, stateUpdate: String)
 }
 
 // Delegate that gets serialized updates
 protocol CanvasModelSerializedDelegate: class {
-    func update(stateUpdate: String)
+    func canvasModelSerializedUpdate(stateUpdate: String) // A serialized update to canvas model state
 }
 
-class CanvasModel: CanvasModelSerializedDelegate {
-    var localDelegates: [CanvasModelLocalDelegate] = []
-    var serializedDelegates: [CanvasModelSerializedDelegate] = []
+class CanvasModel: CanvasModelRemoteObserver {
+    var localObservers: [CanvasModelLocalObserver] = []
+    var remoteObservers: [CanvasModelRemoteObserver] = []
 
     private var canvas = Canvas()
 
     func addStroke(stroke: Stroke) {
         canvas.addStroke(stroke)
-        // Send update to local delegates.
-        for delegate in localDelegates {
-            delegate.updated()
+
+        // Notify local observers that canvas has changed
+        for observer in localObservers {
+            observer.canvasModelUpdate(canvasModel: self)
         }
 
-        // Send update to serialized delegates
-        let stateUpdate = self.stateUpdate()
-        for delegate in serializedDelegates {
-            delegate.update(stateUpdate: stateUpdate)
+        // Notify remote observers that canvas has changed with a serialized update
+        let stateUpdate = self.makeStateUpdate()
+        for observer in remoteObservers {
+            observer.canvasModelStateUpdate(canvasModel: self, stateUpdate: stateUpdate)
         }
     }
 
-    func stateUpdate() -> String {
+    func makeStateUpdate() -> String {
         // FIXME: Error handling!
         do {
             let jsonEncoder = JSONEncoder()
@@ -131,9 +136,9 @@ class CanvasModel: CanvasModelSerializedDelegate {
         return canvas.allStrokes()
     }
 
-    func update(stateUpdate: String) {
+    func canvasModelStateUpdate(canvasModel: CanvasModel, stateUpdate: String) {
+        // Received a state update from a remote canvas, update our state
         // FIXME: Error handling!
-//        Log.info?.value(stateUpdate)
 
         let jsonDecoder = JSONDecoder()
         let jsonData = stateUpdate.data(using: .utf8)!
@@ -142,8 +147,8 @@ class CanvasModel: CanvasModelSerializedDelegate {
         } catch {
             Log.error?.message("Failed to decode JSON string!")
         }
-        for delegate in localDelegates {
-            delegate.updated()
+        for observer in localObservers {
+            observer.canvasModelUpdate(canvasModel: self)
         }
     }
 }

@@ -12,6 +12,9 @@ import UIKit
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
+
+    var leftCM: CanvasModel?
+    var rightCM: CanvasModel?
     var canvasClient: CanvasClient?
     var canvasServer: CanvasServer?
 
@@ -19,8 +22,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         Log.enable()
 
-        canvasClient = CanvasClient(name: "iPad Air 2")
-        canvasServer = CanvasServer()
+        leftCM = CanvasModel()
+        rightCM = CanvasModel()
+        leftCM!.remoteObservers.append(rightCM!)
+        rightCM!.remoteObservers.append(leftCM!)
+
+//        canvasClient = CanvasClient(name: "iPad Air 2")
+//        canvasServer = CanvasServer()
         return true
     }
 
