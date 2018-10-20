@@ -18,10 +18,10 @@
 		91425661211BBBCB00786E4E /* ArtScaleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91425660211BBBCB00786E4E /* ArtScaleUITests.swift */; };
 		915CF3C5211BCA6000056709 /* CanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915CF3C4211BCA6000056709 /* CanvasView.swift */; };
 		9160ED0E21793657004DF6A7 /* CanvasServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9160ED0D21793657004DF6A7 /* CanvasServer.swift */; };
-		9160ED1021793E1E004DF6A7 /* CanvasClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9160ED0F21793E1E004DF6A7 /* CanvasClient.swift */; };
 		9160ED122179A60F004DF6A7 /* Cartfile.resolved in Resources */ = {isa = PBXBuildFile; fileRef = 9160ED112179A60F004DF6A7 /* Cartfile.resolved */; };
 		91913A84214AD594005D9108 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 91913A83214AD594005D9108 /* .swiftlint.yml */; };
 		91913A87214B25F2005D9108 /* CanvasViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91913A86214B25F2005D9108 /* CanvasViewModel.swift */; };
+		91AF00E4217B997400E7CE94 /* CanvasPeerConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91AF00E3217B997400E7CE94 /* CanvasPeerConnection.swift */; };
 		91BC979C2149C54D00A52161 /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = 91BC979B2149C54D00A52161 /* Cartfile */; };
 		91BC979E2149C74F00A52161 /* CleanroomLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91BC979D2149C74F00A52161 /* CleanroomLogger.framework */; };
 		91BC979F2149C74F00A52161 /* CleanroomLogger.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 91BC979D2149C74F00A52161 /* CleanroomLogger.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -79,10 +79,10 @@
 		91425662211BBBCB00786E4E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		915CF3C4211BCA6000056709 /* CanvasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasView.swift; sourceTree = "<group>"; };
 		9160ED0D21793657004DF6A7 /* CanvasServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasServer.swift; sourceTree = "<group>"; };
-		9160ED0F21793E1E004DF6A7 /* CanvasClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasClient.swift; sourceTree = "<group>"; };
 		9160ED112179A60F004DF6A7 /* Cartfile.resolved */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile.resolved; sourceTree = SOURCE_ROOT; };
 		91913A83214AD594005D9108 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .swiftlint.yml; sourceTree = "<group>"; };
 		91913A86214B25F2005D9108 /* CanvasViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasViewModel.swift; sourceTree = "<group>"; };
+		91AF00E3217B997400E7CE94 /* CanvasPeerConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasPeerConnection.swift; sourceTree = "<group>"; };
 		91BC979B2149C54D00A52161 /* Cartfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile; sourceTree = SOURCE_ROOT; };
 		91BC979D2149C74F00A52161 /* CleanroomLogger.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CleanroomLogger.framework; path = Carthage/Build/iOS/CleanroomLogger.framework; sourceTree = "<group>"; };
 		91BC97A12149C98E00A52161 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = SOURCE_ROOT; };
@@ -199,7 +199,7 @@
 				91425649211BBBCB00786E4E /* LaunchScreen.storyboard */,
 				91425640211BBBCB00786E4E /* AppDelegate.swift */,
 				9160ED0D21793657004DF6A7 /* CanvasServer.swift */,
-				9160ED0F21793E1E004DF6A7 /* CanvasClient.swift */,
+				91AF00E3217B997400E7CE94 /* CanvasPeerConnection.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -370,8 +370,8 @@
 				915CF3C5211BCA6000056709 /* CanvasView.swift in Sources */,
 				91425641211BBBCB00786E4E /* AppDelegate.swift in Sources */,
 				91CCAC0C215431AF00E0322E /* AppViewController.swift in Sources */,
-				9160ED1021793E1E004DF6A7 /* CanvasClient.swift in Sources */,
 				91080A91215C636F009C4CDE /* Shaders.metal in Sources */,
+				91AF00E4217B997400E7CE94 /* CanvasPeerConnection.swift in Sources */,
 				91913A87214B25F2005D9108 /* CanvasViewModel.swift in Sources */,
 				91E4D88C215C31FC004C6A16 /* CanvasViewController.swift in Sources */,
 			);

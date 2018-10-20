@@ -10,14 +10,24 @@ import Foundation
 import Network
 import CleanroomLogger
 
-class CanvasServer: CanvasModelRemoteObserver {
+// The CanvasServer is a peer-to-peer service that synchronizes client state
+// with other peers.
+
+class CanvasServer {
     var listener: NWListener
-    var queue: DispatchQueue
+    var serverQueue: DispatchQueue
+    var canvasPeerConnections: [CanvasPeerConnection] = []
+    var canvasModel: CanvasModel
+
+    // FIXME: Need to track connection state per connection, not globally
     var connected: Bool = false
 
-    init?() {
-        queue = DispatchQueue(label: "Canvas Server Queue")
+    init(canvasModel: CanvasModel) {
+        self.canvasModel = canvasModel
+        Log.info?.trace()
+        serverQueue = DispatchQueue(label: "Canvas Server Queue")
 
+        // First, initialize the server
         listener = try! NWListener(using: NWParameters.tcp)
         listener.service = NWListener.Service(type: "_canvas._tcp")
         listener.serviceRegistrationUpdateHandler = { (serviceChange) in
@@ -35,11 +45,10 @@ class CanvasServer: CanvasModelRemoteObserver {
         }
 
         listener.newConnectionHandler = { [weak self] (newConnection) in
+            Log.info?.message("Got new connection!")
             if let strongSelf = self {
-                Log.info?.message("Got new connection!")
-                newConnection.start(queue: strongSelf.queue)
-                Log.info?.trace()
-                strongSelf.receive(on: newConnection)
+                let newPeerConnection = CanvasPeerConnection(connection: newConnection, canvasModel: strongSelf.canvasModel, isClient: false)
+                strongSelf.canvasPeerConnections.append(newPeerConnection)
             }
         }
 
@@ -53,25 +62,16 @@ class CanvasServer: CanvasModelRemoteObserver {
                 break
             }
         }
-        listener.start(queue: queue)
+        listener.start(queue: serverQueue)
+
+        // Now that we've advertised ourself, find all of the existing
+        // _canvas._tcp services out there and connect ourselves to them.
     }
 
-    func receive(on connection: NWConnection) {
-        Log.info?.trace()
-        connection.receive(minimumIncompleteLength: 5, maximumLength: 5, completion: {(content, _, _, _) in
-            Log.info?.trace()
-            if let data = content {
-                if !self.connected {
-                    // Do initial connection
-                    connection.send(content: data, completion: .idempotent)
-                    self.connected = true
-                }
-                Log.info?.value(data)
-            }
-        })
-    }
-
-    func canvasModelStateUpdate(canvasModel: CanvasModel, stateUpdate: String) {
-        // Send update to connected cleints
+    func connectToPeer(name: String) {
+        // Create connection, then hand off everything else to CanvasPeerConnection
+        let connection = NWConnection(to: NWEndpoint.service(name: name, type: "_canvas._tcp", domain: "local", interface: nil), using: NWParameters.tcp)
+        let newPeerConnection = CanvasPeerConnection(connection: connection, canvasModel: self.canvasModel, isClient: true)
+        self.canvasPeerConnections.append(newPeerConnection)
     }
 }

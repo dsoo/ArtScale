@@ -15,7 +15,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var leftCM: CanvasModel?
     var rightCM: CanvasModel?
-    var canvasClient: CanvasClient?
     var canvasServer: CanvasServer?
 
     func application(_: UIApplication, didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -28,7 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         rightCM!.remoteObservers.append(leftCM!)
 
 //        canvasClient = CanvasClient(name: "iPad Air 2")
-//        canvasServer = CanvasServer()
+        canvasServer = CanvasServer(canvasModel: leftCM!)
         return true
     }
 

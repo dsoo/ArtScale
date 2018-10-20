@@ -94,11 +94,6 @@ protocol CanvasModelRemoteObserver: class {
     func canvasModelStateUpdate(canvasModel: CanvasModel, stateUpdate: String)
 }
 
-// Delegate that gets serialized updates
-protocol CanvasModelSerializedDelegate: class {
-    func canvasModelSerializedUpdate(stateUpdate: String) // A serialized update to canvas model state
-}
-
 class CanvasModel: CanvasModelRemoteObserver {
     var localObservers: [CanvasModelLocalObserver] = []
     var remoteObservers: [CanvasModelRemoteObserver] = []
