@@ -91,7 +91,7 @@ protocol CanvasModelLocalObserver: class {
 
 protocol CanvasModelRemoteObserver: class {
     // FIXME: Maybe should just have stateupdate
-    func canvasModelStateUpdate(canvasModel: CanvasModel, stateUpdate: String)
+    func canvasModelStateUpdate(canvasModel: CanvasModel, stateUpdate: Data)
 }
 
 class CanvasModel: CanvasModelRemoteObserver {
@@ -115,15 +115,14 @@ class CanvasModel: CanvasModelRemoteObserver {
         }
     }
 
-    func makeStateUpdate() -> String {
+    func makeStateUpdate() -> Data {
         // FIXME: Error handling!
         do {
             let jsonEncoder = JSONEncoder()
             let jsonData = try jsonEncoder.encode(canvas)
-            let jsonString = String(data: jsonData, encoding: .utf8)
-            return jsonString ?? "{}"
+            return jsonData
         } catch {
-            return "{}"
+            return String("{}").data(using: .utf8)!
         }
     }
 
@@ -131,16 +130,15 @@ class CanvasModel: CanvasModelRemoteObserver {
         return canvas.allStrokes()
     }
 
-    func canvasModelStateUpdate(canvasModel: CanvasModel, stateUpdate: String) {
+    func canvasModelStateUpdate(canvasModel: CanvasModel, stateUpdate: Data) {
         // Received a state update from a remote canvas, update our state
         // FIXME: Error handling!
 
         let jsonDecoder = JSONDecoder()
-        let jsonData = stateUpdate.data(using: .utf8)!
         do {
-            canvas = try jsonDecoder.decode(Canvas.self, from: jsonData)
+            canvas = try jsonDecoder.decode(Canvas.self, from: stateUpdate)
         } catch {
-            Log.error?.message("Failed to decode JSON string!")
+            Log.error?.message("Failed to decode JSON data!")
         }
         for observer in localObservers {
             observer.canvasModelUpdate(canvasModel: self)

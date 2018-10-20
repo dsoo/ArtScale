@@ -87,8 +87,46 @@ class CanvasPeerConnection: CanvasModelRemoteObserver {
             }
         })
     }
-
-    func canvasModelStateUpdate(canvasModel: CanvasModel, stateUpdate: String) {
+    
+    func canvasModelStateUpdate(canvasModel: CanvasModel, stateUpdate: Data) {
         // Send this update over the network to peers.
+//        // Unpack the header
+//        connection.receive(minimumIncompleteLength: 5, maximumLength: 5, completion: {(content, _, _, _) in
+//            if content != nil {
+//                Log.info?.message("Got connected - \(content!)!")
+//
+//            }
+//        })
+    }
+
+    func receiveMessage() {
+        connection.receive(minimumIncompleteLength: 9, maximumLength: 9, completion: {[weak self] (content, _, _, _) in
+            if content != nil {
+                // Unpack the header
+                let len = Int(String(bytes:content!, encoding:.utf8)!)!
+                self!.receiveBody(len: len)
+            }
+        })
+    }
+    
+    func receiveBody(len: Int) {
+        connection.receive(minimumIncompleteLength: len, maximumLength: len, completion: {[weak     self] (content, _, _, _) in
+            if content != nil {
+                self!.handleMessage(body: content!)
+            }
+        })
+    }
+    
+    func handleMessage(body: Data) {
+        Log.info?.trace()
+        canvasModel!.canvasModelStateUpdate(canvasModel: canvasModel!, stateUpdate: body)
+    }
+
+    func packMessage(type: Character, body: Data) -> Data? {
+        // Pack a message with standardized header
+        let len = body.count
+        var message = String(format:"%08d:", len).data(using: .utf8)
+        message!.append(body)
+        return message
     }
 }
