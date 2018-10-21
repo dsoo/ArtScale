@@ -23,8 +23,12 @@ class CanvasServer {
     // FIXME: Need to track connection state per connection, not globally
     var connected: Bool = false
 
+    func info(_ message: String) {
+        Log.info?.message("CS:\(self.name): \(message)")
+    }
+
     init(name: String, canvasModel: CanvasModel) {
-        Log.info?.message("CanvasServer:\(name) init")
+        Log.info?.message("CS:\(name) init")
         self.name = name
         self.canvasModel = canvasModel
         serverQueue = DispatchQueue(label: "Canvas Server Queue")
@@ -47,7 +51,7 @@ class CanvasServer {
         }
 
         listener.newConnectionHandler = { [weak self] (newConnection) in
-            Log.info?.message("Got new connection!")
+            self!.info("newConnection")
             if let strongSelf = self {
                 let newPeerConnection = CanvasPeerConnection(name: strongSelf.name, peerName: "incoming", connection: newConnection, canvasModel: strongSelf.canvasModel, isClient: false)
                 strongSelf.canvasPeerConnections.append(newPeerConnection)
@@ -71,9 +75,9 @@ class CanvasServer {
     }
 
     func connectToPeer(peerName: String) {
-        Log.info?.message("CanvasServer:\(self.name) connecting to: \(peerName)")
+        info("connecting to: \(peerName)")
         // Create connection, then hand off everything else to CanvasPeerConnection
-        let connection = NWConnection(to: NWEndpoint.service(name: name, type: "_canvas._tcp", domain: "local", interface: nil), using: NWParameters.tcp)
+        let connection = NWConnection(to: NWEndpoint.service(name: peerName, type: "_canvas._tcp", domain: "local", interface: nil), using: NWParameters.tcp)
         let newPeerConnection = CanvasPeerConnection(name: self.name, peerName: peerName, connection: connection, canvasModel: self.canvasModel, isClient: true)
         self.canvasPeerConnections.append(newPeerConnection)
     }

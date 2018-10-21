@@ -26,7 +26,7 @@ class CanvasPeerConnection: CanvasModelRemoteObserver {
     }
 
     init(name: String, peerName: String, connection: NWConnection, canvasModel: CanvasModel, isClient: Bool) {
-        Log.info?.trace()
+        Log.info?.message("CPC:\(name)->\(peerName): init")
         self.name = name
         self.peerName = peerName
         self.connection = connection
@@ -102,8 +102,7 @@ class CanvasPeerConnection: CanvasModelRemoteObserver {
     }
 
     func handleMessage(body: Data) {
-        Log.info?.trace()
-        info("handleMessage: \(String(bytes: body, encoding: .utf8))")
+        info("handleMessage: \(body.count) bytes")
         canvasModel!.canvasModelStateUpdate(canvasModel: canvasModel!, stateUpdate: body)
     }
 
@@ -118,7 +117,7 @@ class CanvasPeerConnection: CanvasModelRemoteObserver {
 
     func sendMessage(body: Data) {
         let packedData = packMessage(body: body)
-        info("Sending \(String(decoding: packedData!, as: UTF8.self))")
+        info("Sending \(body.count) bytes")
         connection.send(content: packedData, completion: .contentProcessed({[weak self] (error) in
             if let error = error {
                 self?.info("Send error: \(error)")
