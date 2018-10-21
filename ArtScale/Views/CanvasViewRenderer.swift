@@ -104,6 +104,8 @@ class CanvasViewRenderer: NSObject, MTKViewDelegate {
             offset += stroke.points.count
         }
 
-        vertexBuffer = device.makeBuffer(bytes: vertexData, length: vertexData.count * MemoryLayout<Float>.stride)
+        if vertexData.count > 0 {
+            vertexBuffer = device.makeBuffer(bytes: vertexData, length: vertexData.count * MemoryLayout<Float>.stride)
+        }
     }
 }

@@ -15,7 +15,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var leftCM: CanvasModel?
     var rightCM: CanvasModel?
-    var canvasServer: CanvasServer?
+    var leftCanvasServer: CanvasServer?
+    var rightCanvasServer: CanvasServer?
 
     func application(_: UIApplication, didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -23,11 +24,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         leftCM = CanvasModel()
         rightCM = CanvasModel()
-        leftCM!.remoteObservers.append(rightCM!)
-        rightCM!.remoteObservers.append(leftCM!)
+//        leftCM!.remoteObservers.append(rightCM!)
+//        rightCM!.remoteObservers.append(leftCM!)
 
-//        canvasClient = CanvasClient(name: "iPad Air 2")
-        canvasServer = CanvasServer(canvasModel: leftCM!)
+        leftCanvasServer = CanvasServer(name: "Left", canvasModel: leftCM!)
+        rightCanvasServer = CanvasServer(name: "Right", canvasModel: rightCM!)
+
+        leftCanvasServer?.connectToPeer(peerName: "Right")
+//        rightCanvasServer?.connectToPeer(peerName: "Left")
         return true
     }
 

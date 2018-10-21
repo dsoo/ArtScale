@@ -14,6 +14,7 @@ import CleanroomLogger
 // with other peers.
 
 class CanvasServer {
+    var name: String
     var listener: NWListener
     var serverQueue: DispatchQueue
     var canvasPeerConnections: [CanvasPeerConnection] = []
@@ -22,14 +23,15 @@ class CanvasServer {
     // FIXME: Need to track connection state per connection, not globally
     var connected: Bool = false
 
-    init(canvasModel: CanvasModel) {
+    init(name: String, canvasModel: CanvasModel) {
+        Log.info?.message("CanvasServer:\(name) init")
+        self.name = name
         self.canvasModel = canvasModel
-        Log.info?.trace()
         serverQueue = DispatchQueue(label: "Canvas Server Queue")
 
         // First, initialize the server
         listener = try! NWListener(using: NWParameters.tcp)
-        listener.service = NWListener.Service(type: "_canvas._tcp")
+        listener.service = NWListener.Service(name: name, type: "_canvas._tcp")
         listener.serviceRegistrationUpdateHandler = { (serviceChange) in
             switch (serviceChange) {
             case .add(let endpoint):
@@ -47,7 +49,7 @@ class CanvasServer {
         listener.newConnectionHandler = { [weak self] (newConnection) in
             Log.info?.message("Got new connection!")
             if let strongSelf = self {
-                let newPeerConnection = CanvasPeerConnection(connection: newConnection, canvasModel: strongSelf.canvasModel, isClient: false)
+                let newPeerConnection = CanvasPeerConnection(name: strongSelf.name, peerName: "incoming", connection: newConnection, canvasModel: strongSelf.canvasModel, isClient: false)
                 strongSelf.canvasPeerConnections.append(newPeerConnection)
             }
         }
@@ -68,10 +70,11 @@ class CanvasServer {
         // _canvas._tcp services out there and connect ourselves to them.
     }
 
-    func connectToPeer(name: String) {
+    func connectToPeer(peerName: String) {
+        Log.info?.message("CanvasServer:\(self.name) connecting to: \(peerName)")
         // Create connection, then hand off everything else to CanvasPeerConnection
         let connection = NWConnection(to: NWEndpoint.service(name: name, type: "_canvas._tcp", domain: "local", interface: nil), using: NWParameters.tcp)
-        let newPeerConnection = CanvasPeerConnection(connection: connection, canvasModel: self.canvasModel, isClient: true)
+        let newPeerConnection = CanvasPeerConnection(name: self.name, peerName: peerName, connection: connection, canvasModel: self.canvasModel, isClient: true)
         self.canvasPeerConnections.append(newPeerConnection)
     }
 }

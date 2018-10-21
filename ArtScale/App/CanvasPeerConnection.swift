@@ -13,15 +13,24 @@ import CleanroomLogger
 // Maintains all state necessary to synchronize the state of a canvas with a peer
 
 class CanvasPeerConnection: CanvasModelRemoteObserver {
+    var name: String
+    var peerName: String
     var connection: NWConnection
     var queue: DispatchQueue
     var isClient: Bool = false
     var connected: Bool = false
     var canvasModel: CanvasModel?
 
-    init(connection: NWConnection, canvasModel: CanvasModel, isClient: Bool) {
+    func info(_ message: String) {
+        Log.info?.message("CPC:\(self.name)->\(self.peerName): \(message)")
+    }
+
+    init(name: String, peerName: String, connection: NWConnection, canvasModel: CanvasModel, isClient: Bool) {
         Log.info?.trace()
+        self.name = name
+        self.peerName = peerName
         self.connection = connection
+        self.canvasModel = canvasModel
         self.isClient = isClient
 
         queue = DispatchQueue(label: "Canvas Peer Queue")
@@ -34,22 +43,22 @@ class CanvasPeerConnection: CanvasModelRemoteObserver {
         connection.stateUpdateHandler = { [weak self] (newState) in
             switch(newState) {
             case .ready:
-                Log.info?.message("Ready to send")
+                self?.info("Ready")
                 if (self?.isClient)! {
                     self?.sendHandshake()
                 } else {
-                    self?.receiveHandshake()
+                    self?.receiveMessage()
                 }
             case .preparing:
-                Log.info?.message("Preparing")
+                self?.info("Preparing")
             case .setup:
-                Log.info?.message("Setup")
+                self?.info("Setup")
             case .cancelled:
-                Log.info?.message("Cancelled")
+                self?.info("Cancelled")
             case .failed(let error):
-                Log.info?.message("Client failed with error: \(error)")
+                self?.info("Failed with error: \(error)")
             case .waiting(let error):
-                Log.info?.message("Client waiting with error: \(error)")
+                self?.info("Waiting with error: \(error)")
             }
         }
 
@@ -59,74 +68,61 @@ class CanvasPeerConnection: CanvasModelRemoteObserver {
     // If we are the "server", handle receiving the handshake from the client
     func receiveHandshake() {
         Log.info?.trace()
-        connection.receive(minimumIncompleteLength: 5, maximumLength: 5, completion: {[weak self] (content, _, _, _) in
-            Log.info?.trace()
-            if let strongSelf = self {
-                if let data = content {
-                    if !strongSelf.connected {
-                        // Do initial connection
-                        strongSelf.connection.send(content: data, completion: .idempotent)
-                        strongSelf.connected = true
-                    }
-                    Log.info?.value(data)
-                }
-            }
-        })
+        receiveMessage()
     }
 
     func sendHandshake() {
-        let helloMessage = "hello".data(using: .utf8)
-        connection.send(content: helloMessage, completion: .contentProcessed({ (error) in
-            if let error = error {
-                Log.info?.message("Send error: \(error)")
-            }
-        }))
-        connection.receive(minimumIncompleteLength: 5, maximumLength: 5, completion: {(content, _, _, _) in
-            if content != nil {
-                Log.info?.message("Got connected - \(content!)!")
-            }
-        })
+        // Just send the state of the current canvas to the server
+        sendMessage(body: canvasModel!.makeStateUpdate())
     }
-    
+
     func canvasModelStateUpdate(canvasModel: CanvasModel, stateUpdate: Data) {
         // Send this update over the network to peers.
-//        // Unpack the header
-//        connection.receive(minimumIncompleteLength: 5, maximumLength: 5, completion: {(content, _, _, _) in
-//            if content != nil {
-//                Log.info?.message("Got connected - \(content!)!")
-//
-//            }
-//        })
+        sendMessage(body: canvasModel.makeStateUpdate())
     }
 
     func receiveMessage() {
-        connection.receive(minimumIncompleteLength: 9, maximumLength: 9, completion: {[weak self] (content, _, _, _) in
+        info("receiveMessage")
+        connection.receive(minimumIncompleteLength: 8, maximumLength: 8, completion: {[weak self] (content, _, _, _) in
             if content != nil {
-                // Unpack the header
-                let len = Int(String(bytes:content!, encoding:.utf8)!)!
+                let len = Int(String(bytes: content!, encoding: .utf8)!)!
+                self?.info(String(len))
                 self!.receiveBody(len: len)
             }
         })
     }
-    
+
     func receiveBody(len: Int) {
-        connection.receive(minimumIncompleteLength: len, maximumLength: len, completion: {[weak     self] (content, _, _, _) in
+        connection.receive(minimumIncompleteLength: len, maximumLength: len, completion: {[weak self] (content, _, _, _) in
             if content != nil {
                 self!.handleMessage(body: content!)
+                self!.receiveMessage()
             }
         })
     }
-    
+
     func handleMessage(body: Data) {
         Log.info?.trace()
+        info("handleMessage: \(String(bytes: body, encoding: .utf8))")
         canvasModel!.canvasModelStateUpdate(canvasModel: canvasModel!, stateUpdate: body)
     }
 
-    func packMessage(type: Character, body: Data) -> Data? {
+    func packMessage(body: Data) -> Data? {
         // Pack a message with standardized header
         let len = body.count
-        var message = String(format:"%08d:", len).data(using: .utf8)
+        let messageStr = String(format: "%08d", len)
+        var message = messageStr.data(using: .utf8)
         message!.append(body)
         return message
+    }
+
+    func sendMessage(body: Data) {
+        let packedData = packMessage(body: body)
+        info("Sending \(String(decoding: packedData!, as: UTF8.self))")
+        connection.send(content: packedData, completion: .contentProcessed({[weak self] (error) in
+            if let error = error {
+                self?.info("Send error: \(error)")
+            }
+        }))
     }
 }
