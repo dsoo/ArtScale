@@ -74,20 +74,25 @@ class CanvasPeerConnection: CanvasModelRemoteObserver {
     func sendHandshake() {
         // Just send the state of the current canvas to the server
         sendMessage(body: canvasModel!.makeStateUpdate())
+        receiveMessage()
     }
 
     func canvasModelStateUpdate(canvasModel: CanvasModel, stateUpdate: Data) {
+        info("cMSU")
         // Send this update over the network to peers.
         sendMessage(body: canvasModel.makeStateUpdate())
     }
 
     func receiveMessage() {
         info("receiveMessage")
-        connection.receive(minimumIncompleteLength: 8, maximumLength: 8, completion: {[weak self] (content, _, _, _) in
-            if content != nil {
+        connection.receive(minimumIncompleteLength: 8, maximumLength: 8, completion: {[weak self] (content, contentContext, isComplete, error) in
+            self!.info("\(contentContext),\(isComplete),\(error)")
+            if (content != nil) && (content!.count > 0) {
+                self!.info("\(content!.count)")
                 let len = Int(String(bytes: content!, encoding: .utf8)!)!
-                self?.info(String(len))
                 self!.receiveBody(len: len)
+            } else {
+                self!.receiveMessage()
             }
         })
     }
@@ -120,7 +125,7 @@ class CanvasPeerConnection: CanvasModelRemoteObserver {
         info("Sending \(body.count) bytes")
         connection.send(content: packedData, completion: .contentProcessed({[weak self] (error) in
             if let error = error {
-                self?.info("Send error: \(error)")
+                self!.info("Send error: \(error)")
             }
         }))
     }
