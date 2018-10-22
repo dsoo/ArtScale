@@ -13,7 +13,7 @@ import CleanroomLogger
 // The CanvasServer is a peer-to-peer service that synchronizes client state
 // with other peers.
 
-class CanvasServer {
+class CanvasServer: NSObject, NetServiceBrowserDelegate {
     var name: String
     var listener: NWListener
     var serverQueue: DispatchQueue
@@ -31,7 +31,6 @@ class CanvasServer {
         Log.info?.message("CS:\(name) init")
         self.name = name
         self.canvasModel = canvasModel
-        serverQueue = DispatchQueue(label: "Canvas Server Queue")
 
         // First, initialize the server
         listener = try! NWListener(using: NWParameters.tcp)
@@ -50,8 +49,11 @@ class CanvasServer {
             }
         }
 
+        serverQueue = DispatchQueue(label: "Canvas Server Queue")
+        super.init()
+
         listener.newConnectionHandler = { [weak self] (newConnection) in
-            self!.info("newConnection")
+            self!.info("newConnection \(newConnection)")
             if let strongSelf = self {
                 let newPeerConnection = CanvasPeerConnection(name: strongSelf.name, peerName: "incoming", connection: newConnection, canvasModel: strongSelf.canvasModel, isClient: false)
                 strongSelf.canvasPeerConnections.append(newPeerConnection)
@@ -68,10 +70,33 @@ class CanvasServer {
                 break
             }
         }
-        listener.start(queue: serverQueue)
 
-        // Now that we've advertised ourself, find all of the existing
-        // _canvas._tcp services out there and connect ourselves to them.
+        listener.start(queue: serverQueue)
+    }
+
+    func findPeers() {
+        info("Finding peers")
+        // Use NetServiceBrowser to find peer networks
+        let nsb = NetServiceBrowser()
+        nsb.delegate = self
+        nsb.searchForServices(ofType: "_canvas._tcp", inDomain: "local")
+        RunLoop.current.run(until: Date(timeIntervalSinceNow: 1.0))
+    }
+
+    func netServiceBrowser(_ browser: NetServiceBrowser, didFind service: NetService, moreComing: Bool) {
+        info("found peer \(service.name)")
+        if (service.name != self.name) {
+            connectToPeer(peerName: service.name)
+        }
+    }
+
+    func netServiceBrowser(_ browser: NetServiceBrowser, didNotSearch errorDict: [String: NSNumber]) {
+        // Did not successfully find any services
+        Log.info?.trace()
+    }
+
+    func netServiceBrowserDidStopSearch(_ browser: NetServiceBrowser) {
+        Log.info?.trace()
     }
 
     func connectToPeer(peerName: String) {
@@ -81,4 +106,5 @@ class CanvasServer {
         let newPeerConnection = CanvasPeerConnection(name: self.name, peerName: peerName, connection: connection, canvasModel: self.canvasModel, isClient: true)
         self.canvasPeerConnections.append(newPeerConnection)
     }
+
 }

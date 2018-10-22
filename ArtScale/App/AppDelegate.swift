@@ -24,14 +24,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         leftCM = CanvasModel()
         rightCM = CanvasModel()
-//        leftCM!.remoteObservers.append(rightCM!)
-//        rightCM!.remoteObservers.append(leftCM!)
 
         leftCanvasServer = CanvasServer(name: "Left", canvasModel: leftCM!)
         rightCanvasServer = CanvasServer(name: "Right", canvasModel: rightCM!)
 
-        leftCanvasServer?.connectToPeer(peerName: "Right")
-//        rightCanvasServer?.connectToPeer(peerName: "Left")
+        leftCanvasServer?.findPeers()
+//        leftCanvasServer?.connectToPeer(peerName: "Right")
         return true
     }
 

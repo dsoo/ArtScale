@@ -91,8 +91,10 @@ class CanvasPeerConnection: CanvasModelRemoteObserver {
                 self!.info("\(content!.count)")
                 let len = Int(String(bytes: content!, encoding: .utf8)!)!
                 self!.receiveBody(len: len)
-            } else {
+            } else if !isComplete {
                 self!.receiveMessage()
+            } else {
+                self!.info("Closing connection: \(self!.connection)")
             }
         })
     }
