@@ -110,7 +110,7 @@ class P2PConnection: P2PStateRemoteObserver {
 
     func handleMessage(body: Data) {
         info("handleMessage: \(body.count) bytes")
-        p2pState!.p2pStateUpdate(p2pState: p2pState!, stateUpdate: body)
+        p2pState!.update(p2pState: p2pState!, stateUpdate: body)
     }
 
     func packMessage(body: Data) -> Data? {

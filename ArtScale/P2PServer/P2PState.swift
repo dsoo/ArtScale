@@ -15,22 +15,20 @@ protocol P2PStateRemoteObserver {
     func p2pStateUpdate(p2pState: P2PState, stateUpdate: Data)
 }
 
-protocol P2PStateDelegate {
+protocol P2PState {
+    var localObservers: [P2PStateLocalObserver] {get set}
+    var remoteObservers: [P2PStateRemoteObserver] {get set}
     func p2pStateMakeFullUpdate(p2pState: P2PState) -> Data
-    func p2pStateReceiveFullUpdate(p2pState: P2PState, fullUpdate: Data)
+    func p2pStateApplyFullUpdate(p2pState: P2PState, fullUpdate: Data)
 }
 
-class P2PState: P2PStateRemoteObserver {
-    var localObservers: [P2PStateLocalObserver] = []
-    var remoteObservers: [P2PStateRemoteObserver] = []
-    var delegate: P2PStateDelegate?
-
+extension P2PState {
     func makeFullUpdate() -> Data {
-        return delegate!.p2pStateMakeFullUpdate(p2pState: self)
+        return p2pStateMakeFullUpdate(p2pState: self)
     }
 
     func updateAllObservers() {
-        let stateUpdate = delegate!.p2pStateMakeFullUpdate(p2pState: self)
+        let stateUpdate = p2pStateMakeFullUpdate(p2pState: self)
 
         for observer in localObservers {
             observer.p2pStateUpdate(p2pState: self)
@@ -48,10 +46,9 @@ class P2PState: P2PStateRemoteObserver {
         }
     }
 
-    func p2pStateUpdate(p2pState: P2PState, stateUpdate: Data) {
+    func update(p2pState: P2PState, stateUpdate: Data) {
         // Received a state update from a remote peer, update our state
-        delegate!.p2pStateReceiveFullUpdate(p2pState: self, fullUpdate: stateUpdate)
+        p2pStateApplyFullUpdate(p2pState: self, fullUpdate: stateUpdate)
         updateLocalObservers()
     }
-
 }

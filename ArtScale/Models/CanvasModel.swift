@@ -89,13 +89,10 @@ protocol CanvasModelLocalObserver: class {
     func canvasModelUpdate(canvasModel: CanvasModel)
 }
 
-class CanvasModel: P2PState, P2PStateDelegate {
+class CanvasModel: P2PState {
+    var localObservers: [P2PStateLocalObserver] = []
+    var remoteObservers: [P2PStateRemoteObserver] = []
     private var canvas = Canvas()
-
-    override init() {
-        super.init()
-        self.delegate = self
-    }
 
     func addStroke(stroke: Stroke) {
         canvas.addStroke(stroke)
@@ -117,7 +114,7 @@ class CanvasModel: P2PState, P2PStateDelegate {
         return canvas.allStrokes()
     }
 
-    func p2pStateReceiveFullUpdate(p2pState: P2PState, fullUpdate: Data) {
+    func p2pStateApplyFullUpdate(p2pState: P2PState, fullUpdate: Data) {
         // Received a state update from a remote canvas, update our state
         // FIXME: Error handling!
         let jsonDecoder = JSONDecoder()
