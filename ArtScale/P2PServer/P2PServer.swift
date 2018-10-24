@@ -1,5 +1,5 @@
 //
-//  CanvasServer.swift
+//  P2PServer.swift
 //  ArtScale
 //
 //  Created by Douglas Soo on 10/18/18.
@@ -10,31 +10,33 @@ import Foundation
 import Network
 import CleanroomLogger
 
-// The CanvasServer is a peer-to-peer service that synchronizes client state
+// The P2PServer is a peer-to-peer service that synchronizes state
 // with other peers.
 
-class CanvasServer: NSObject, NetServiceBrowserDelegate {
+class P2PServer: NSObject, NetServiceBrowserDelegate {
+    let p2pType = "_canvas._tcp"
     var name: String
     var listener: NWListener
     var serverQueue: DispatchQueue
-    var canvasPeerConnections: [CanvasPeerConnection] = []
-    var canvasModel: CanvasModel
+    var p2pConnections: [P2PConnection] = []
+    var p2pState: P2PState
+    var peerServices: [NetService] = []
 
     // FIXME: Need to track connection state per connection, not globally
     var connected: Bool = false
 
     func info(_ message: String) {
-        Log.info?.message("CS:\(self.name): \(message)")
+        Log.info?.message("P2PS:\(self.name): \(message)")
     }
 
-    init(name: String, canvasModel: CanvasModel) {
-        Log.info?.message("CS:\(name) init")
+    init(name: String, p2pState: P2PState) {
+        Log.info?.message("P2PS:\(name) init")
         self.name = name
-        self.canvasModel = canvasModel
+        self.p2pState = p2pState
 
         // First, initialize the server
         listener = try! NWListener(using: NWParameters.tcp)
-        listener.service = NWListener.Service(name: name, type: "_canvas._tcp")
+        listener.service = NWListener.Service(name: name, type: p2pType)
         listener.serviceRegistrationUpdateHandler = { (serviceChange) in
             switch (serviceChange) {
             case .add(let endpoint):
@@ -49,14 +51,14 @@ class CanvasServer: NSObject, NetServiceBrowserDelegate {
             }
         }
 
-        serverQueue = DispatchQueue(label: "Canvas Server Queue")
+        serverQueue = DispatchQueue(label: "P2PServer Queue")
         super.init()
 
         listener.newConnectionHandler = { [weak self] (newConnection) in
             self!.info("newConnection \(newConnection)")
             if let strongSelf = self {
-                let newPeerConnection = CanvasPeerConnection(name: strongSelf.name, peerName: "incoming", connection: newConnection, canvasModel: strongSelf.canvasModel, isClient: false)
-                strongSelf.canvasPeerConnections.append(newPeerConnection)
+                let newPeerConnection = P2PConnection(name: strongSelf.name, peerName: "incoming", connection: newConnection, p2pState: strongSelf.p2pState, isClient: false)
+                strongSelf.p2pConnections.append(newPeerConnection)
             }
         }
 
@@ -79,13 +81,18 @@ class CanvasServer: NSObject, NetServiceBrowserDelegate {
         // Use NetServiceBrowser to find peer networks
         let nsb = NetServiceBrowser()
         nsb.delegate = self
-        nsb.searchForServices(ofType: "_canvas._tcp", inDomain: "local")
+        nsb.searchForServices(ofType: p2pType, inDomain: "local")
         RunLoop.current.run(until: Date(timeIntervalSinceNow: 1.0))
     }
 
+    //
+    // NetServiceBrowser methods
+    //
     func netServiceBrowser(_ browser: NetServiceBrowser, didFind service: NetService, moreComing: Bool) {
         info("found peer \(service.name)")
+        // FIXME: Find a better way to identify yourself.
         if (service.name != self.name) {
+            peerServices.append(service)
             connectToPeer(peerName: service.name)
         }
     }
@@ -101,10 +108,10 @@ class CanvasServer: NSObject, NetServiceBrowserDelegate {
 
     func connectToPeer(peerName: String) {
         info("connecting to: \(peerName)")
-        // Create connection, then hand off everything else to CanvasPeerConnection
-        let connection = NWConnection(to: NWEndpoint.service(name: peerName, type: "_canvas._tcp", domain: "local", interface: nil), using: NWParameters.tcp)
-        let newPeerConnection = CanvasPeerConnection(name: self.name, peerName: peerName, connection: connection, canvasModel: self.canvasModel, isClient: true)
-        self.canvasPeerConnections.append(newPeerConnection)
+        // Create connection, then hand off everything else P2PPeerConnection
+        let connection = NWConnection(to: NWEndpoint.service(name: peerName, type: p2pType, domain: "local", interface: nil), using: NWParameters.tcp)
+        let newPeerConnection = P2PConnection(name: self.name, peerName: peerName, connection: connection, p2pState: self.p2pState, isClient: true)
+        self.p2pConnections.append(newPeerConnection)
     }
 
 }

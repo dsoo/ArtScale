@@ -9,7 +9,7 @@
 import Foundation
 import CleanroomLogger
 
-class CanvasViewModel: CanvasModelLocalObserver {
+class CanvasViewModel: P2PStateLocalObserver {
     private var canvasModel: CanvasModel?
     var renderer: CanvasViewRenderer?
     var renderedStrokes: [Stroke] = []
@@ -26,11 +26,13 @@ class CanvasViewModel: CanvasModelLocalObserver {
     // View data update methods
     //
 
-    func canvasModelUpdate(canvasModel: CanvasModel) {
+    func p2pStateUpdate(p2pState: P2PState) {
         // Transform the "abstract" strokes coming from the model into "rendering strokes"
         // Tell the UI to redraw based on the rendering strokes in the controller
+
+        // FIXME: Get CanvasModel from func?
         // FIXME: Being lazy and just directly passing stroke data to renderer for now
-        renderedStrokes = canvasModel.allStrokes()
+        renderedStrokes = canvasModel!.allStrokes()
 
         // Update all of the renderer information
         renderer?.updateVertexData()

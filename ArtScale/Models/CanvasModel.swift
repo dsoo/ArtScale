@@ -89,33 +89,20 @@ protocol CanvasModelLocalObserver: class {
     func canvasModelUpdate(canvasModel: CanvasModel)
 }
 
-protocol CanvasModelRemoteObserver: class {
-    // FIXME: Maybe should just have stateupdate
-    func canvasModelStateUpdate(canvasModel: CanvasModel, stateUpdate: Data)
-}
-
-class CanvasModel: CanvasModelRemoteObserver {
-    var localObservers: [CanvasModelLocalObserver] = []
-    var remoteObservers: [CanvasModelRemoteObserver] = []
-
+class CanvasModel: P2PState, P2PStateDelegate {
     private var canvas = Canvas()
+
+    override init() {
+        super.init()
+        self.delegate = self
+    }
 
     func addStroke(stroke: Stroke) {
         canvas.addStroke(stroke)
-
-        // Notify local observers that canvas has changed
-        for observer in localObservers {
-            observer.canvasModelUpdate(canvasModel: self)
-        }
-
-        // Notify remote observers that canvas has changed with a serialized update
-        let stateUpdate = self.makeStateUpdate()
-        for observer in remoteObservers {
-            observer.canvasModelStateUpdate(canvasModel: self, stateUpdate: stateUpdate)
-        }
+        updateAllObservers()
     }
 
-    func makeStateUpdate() -> Data {
+    func p2pStateMakeFullUpdate(p2pState: P2PState) -> Data {
         // FIXME: Error handling!
         do {
             let jsonEncoder = JSONEncoder()
@@ -130,18 +117,14 @@ class CanvasModel: CanvasModelRemoteObserver {
         return canvas.allStrokes()
     }
 
-    func canvasModelStateUpdate(canvasModel: CanvasModel, stateUpdate: Data) {
+    func p2pStateReceiveFullUpdate(p2pState: P2PState, fullUpdate: Data) {
         // Received a state update from a remote canvas, update our state
         // FIXME: Error handling!
-
         let jsonDecoder = JSONDecoder()
         do {
-            canvas = try jsonDecoder.decode(Canvas.self, from: stateUpdate)
+            canvas = try jsonDecoder.decode(Canvas.self, from: fullUpdate)
         } catch {
             Log.error?.message("Failed to decode JSON data!")
-        }
-        for observer in localObservers {
-            observer.canvasModelUpdate(canvasModel: self)
         }
     }
 }

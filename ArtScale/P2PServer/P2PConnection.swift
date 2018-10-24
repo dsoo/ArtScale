@@ -1,5 +1,5 @@
 //
-//  CanvasPeerConnection.swift
+//  P2PConnection.swift
 //  ArtScale
 //
 //  Created by Douglas Soo on 10/20/18.
@@ -12,33 +12,33 @@ import CleanroomLogger
 
 // Maintains all state necessary to synchronize the state of a canvas with a peer
 
-class CanvasPeerConnection: CanvasModelRemoteObserver {
+class P2PConnection: P2PStateRemoteObserver {
     var name: String
     var peerName: String
     var connection: NWConnection
     var queue: DispatchQueue
     var isClient: Bool = false
     var connected: Bool = false
-    var canvasModel: CanvasModel?
+    var p2pState: P2PState?
 
     func info(_ message: String) {
         Log.info?.message("CPC:\(self.name)->\(self.peerName): \(message)")
     }
 
-    init(name: String, peerName: String, connection: NWConnection, canvasModel: CanvasModel, isClient: Bool) {
+    init(name: String, peerName: String, connection: NWConnection, p2pState: P2PState, isClient: Bool) {
         Log.info?.message("CPC:\(name)->\(peerName): init")
         self.name = name
         self.peerName = peerName
         self.connection = connection
-        self.canvasModel = canvasModel
+        self.p2pState = p2pState
         self.isClient = isClient
 
-        queue = DispatchQueue(label: "Canvas Peer Queue")
+        queue = DispatchQueue(label: "P2PConnection Peer Queue")
 
         // If we are the client, we are responsible for initiating the handshake by
         // telling the server our basic information
 
-        canvasModel.remoteObservers.append(self)
+        self.p2pState!.remoteObservers.append(self)
 
         connection.stateUpdateHandler = { [weak self] (newState) in
             switch(newState) {
@@ -67,20 +67,20 @@ class CanvasPeerConnection: CanvasModelRemoteObserver {
 
     // If we are the "server", handle receiving the handshake from the client
     func receiveHandshake() {
-        Log.info?.trace()
+        info("receiveHandshake")
         receiveMessage()
     }
 
     func sendHandshake() {
         // Just send the state of the current canvas to the server
-        sendMessage(body: canvasModel!.makeStateUpdate())
+        sendMessage(body: p2pState!.makeFullUpdate())
         receiveMessage()
     }
 
-    func canvasModelStateUpdate(canvasModel: CanvasModel, stateUpdate: Data) {
-        info("cMSU")
+    func p2pStateUpdate(p2pState: P2PState, stateUpdate: Data) {
+        info("p2pSU")
         // Send this update over the network to peers.
-        sendMessage(body: canvasModel.makeStateUpdate())
+        sendMessage(body: p2pState.makeFullUpdate())
     }
 
     func receiveMessage() {
@@ -110,7 +110,7 @@ class CanvasPeerConnection: CanvasModelRemoteObserver {
 
     func handleMessage(body: Data) {
         info("handleMessage: \(body.count) bytes")
-        canvasModel!.canvasModelStateUpdate(canvasModel: canvasModel!, stateUpdate: body)
+        p2pState!.p2pStateUpdate(p2pState: p2pState!, stateUpdate: body)
     }
 
     func packMessage(body: Data) -> Data? {

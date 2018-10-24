@@ -15,8 +15,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var leftCM: CanvasModel?
     var rightCM: CanvasModel?
-    var leftCanvasServer: CanvasServer?
-    var rightCanvasServer: CanvasServer?
+    var leftCanvasServer: P2PServer?
+    var rightCanvasServer: P2PServer?
 
     func application(_: UIApplication, didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -25,11 +25,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         leftCM = CanvasModel()
         rightCM = CanvasModel()
 
-        leftCanvasServer = CanvasServer(name: "Left", canvasModel: leftCM!)
-        rightCanvasServer = CanvasServer(name: "Right", canvasModel: rightCM!)
+        leftCanvasServer = P2PServer(name: "Left", p2pState: leftCM!)
+        rightCanvasServer = P2PServer(name: "Right", p2pState: rightCM!)
 
-        leftCanvasServer?.findPeers()
-//        leftCanvasServer?.connectToPeer(peerName: "Right")
+//        leftCanvasServer?.findPeers()
+        leftCanvasServer?.connectToPeer(peerName: "Right")
         return true
     }
 
