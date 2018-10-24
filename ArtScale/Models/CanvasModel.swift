@@ -85,14 +85,14 @@ class Canvas: Codable {
     }
 }
 
-protocol CanvasModelLocalObserver: class {
-    func canvasModelUpdate(canvasModel: CanvasModel)
-}
-
 class CanvasModel: P2PState {
     var localObservers: [P2PStateLocalObserver] = []
     var remoteObservers: [P2PStateRemoteObserver] = []
     private var canvas = Canvas()
+
+    func allStrokes() -> [Stroke] {
+        return canvas.allStrokes()
+    }
 
     func addStroke(stroke: Stroke) {
         canvas.addStroke(stroke)
@@ -108,10 +108,6 @@ class CanvasModel: P2PState {
         } catch {
             return String("{}").data(using: .utf8)!
         }
-    }
-
-    func allStrokes() -> [Stroke] {
-        return canvas.allStrokes()
     }
 
     func p2pStateApplyFullUpdate(p2pState: P2PState, fullUpdate: Data) {

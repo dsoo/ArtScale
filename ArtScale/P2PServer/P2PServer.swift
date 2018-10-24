@@ -15,15 +15,12 @@ import CleanroomLogger
 
 class P2PServer: NSObject, NetServiceBrowserDelegate {
     let p2pType = "_canvas._tcp"
-    var name: String
-    var listener: NWListener
-    var serverQueue: DispatchQueue
-    var p2pConnections: [P2PConnection] = []
-    var p2pState: P2PState
-    var peerServices: [NetService] = []
-
-    // FIXME: Need to track connection state per connection, not globally
-    var connected: Bool = false
+    private var name: String
+    private var listener: NWListener
+    private var serverQueue: DispatchQueue
+    private var p2pConnections: [P2PConnection] = []
+    private var p2pState: P2PState
+    private var peerServices: [NetService] = []
 
     func info(_ message: String) {
         Log.info?.message("P2PS:\(self.name): \(message)")
@@ -59,6 +56,7 @@ class P2PServer: NSObject, NetServiceBrowserDelegate {
             if let strongSelf = self {
                 let newPeerConnection = P2PConnection(name: strongSelf.name, peerName: "incoming", connection: newConnection, p2pState: strongSelf.p2pState, isClient: false)
                 strongSelf.p2pConnections.append(newPeerConnection)
+                // FIXME: Identify if this is a connection to a known peer
             }
         }
 
@@ -113,5 +111,4 @@ class P2PServer: NSObject, NetServiceBrowserDelegate {
         let newPeerConnection = P2PConnection(name: self.name, peerName: peerName, connection: connection, p2pState: self.p2pState, isClient: true)
         self.p2pConnections.append(newPeerConnection)
     }
-
 }
