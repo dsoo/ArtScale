@@ -1,5 +1,5 @@
 //
-//  StrokeModel.swift
+//  CanvasModel.swift
 //  ArtScale
 //
 //  Created by Douglas Soo on 8/13/18.
@@ -9,36 +9,31 @@
 import CleanroomLogger
 import Foundation
 
+typealias StrokeID = P2PID
+typealias LayerID = P2PID
+typealias CanvasID = P2PID
+
 class Point: Codable {
-    var date: Date
     var x: Double
     var y: Double
     init(x: Double, y: Double) {
-        date = Date()
         self.x = x
         self.y = y
     }
 }
 
-class Style: Codable {
-    private(set) var params: String
-
-    init(params: String) {
-        self.params = params
-    }
-}
-
-class Stroke: Codable {
-    var id: UUID
-    var date: Date
-    private(set) var style: Style
+class Stroke: P2PNode {
     private(set) var points: [Point]
+    var layerID: LayerID?
 
-    init() {
-        date = Date()
-        id = UUID()
+    init(layerID: LayerID?) {
+        self.layerID = layerID
         points = []
-        style = Style(params: "randColor")
+        super.init(type: "Stroke")
+    }
+
+    required init(from decoder: Decoder) throws {
+        fatalError("init(from:) has not been implemented")
     }
 
     func addPoint(x: Double, y: Double) {
@@ -50,36 +45,69 @@ class Stroke: Codable {
     }
 }
 
-class Layer: Codable {
-    private(set) var strokes: [Stroke]
-    init() {
-        strokes = []
+class Layer: P2PNode {
+    var orderedStrokes: [StrokeID] = []
+    weak var canvas: Canvas?
+    init(canvas: Canvas?) {
+        super.init(type: "Layer")
+        self.canvas = canvas
+    }
+
+    required init(from decoder: Decoder) throws {
+        fatalError("init(from:) has not been implemented")
     }
 
     func addStroke(_ stroke: Stroke) {
-        strokes.append(stroke)
+        orderedStrokes.append(stroke.id)
     }
 }
 
-class Canvas: Codable {
-    var layers: [Layer]
+class Canvas: P2PNode {
+//    var layers: [LayerID: Layer] = [:]
+//    var orderedLayers: [LayerID] = []
+//    var strokes: [StrokeID: Stroke] = [:]
 
     init() {
-        layers = []
+        super.init(type: "Canvas")
+        self.propNCs["layers"] = [P2PID: P2PNode]:[]
     }
 
-    // Add stroke to latest layer
+    //
+    required init(from decoder: Decoder) throws {
+        fatalError("init(from:) has not been implemented")
+    }
+
+    //Add stroke to latest layer
     func addStroke(_ stroke: Stroke) {
         if layers.count == 0 {
-            layers.append(Layer())
+            _ = addLayer()
+            let newLayer = Layer(canvas: self)
+            layers[newLayer.id] = newLayer
         }
-        layers[0].addStroke(stroke)
+        layers.first!.value.addStroke(stroke)
+
+        //FIXME: dirty the node
+    }
+
+    func addLayer() -> Layer {
+        let layer = Layer(canvas: self)
+        return addLayer(layer: layer)
+    }
+
+    func addLayer(layer: Layer) -> Layer {
+        // FIXME: Should we ever allow layers to move between canvases? I don't think so.
+        layers[layer.id] = layer
+        orderedLayers.append(layer.id)
+        return layer
     }
 
     func allStrokes() -> [Stroke] {
         var allStrokes: [Stroke] = []
-        for layer in layers {
-            allStrokes.append(contentsOf: layer.strokes)
+        for (layerID) in orderedLayers {
+            let layer = layers[layerID]
+            for strokeID in layer!.orderedStrokes {
+                allStrokes.append(strokes[strokeID]!)
+            }
         }
         return allStrokes
     }

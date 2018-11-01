@@ -19,6 +19,7 @@
 		915CF3C5211BCA6000056709 /* CanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915CF3C4211BCA6000056709 /* CanvasView.swift */; };
 		9160ED0E21793657004DF6A7 /* P2PServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9160ED0D21793657004DF6A7 /* P2PServer.swift */; };
 		9160ED122179A60F004DF6A7 /* Cartfile.resolved in Resources */ = {isa = PBXBuildFile; fileRef = 9160ED112179A60F004DF6A7 /* Cartfile.resolved */; };
+		918C068A218784D600860458 /* P2PNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918C0689218784D600860458 /* P2PNode.swift */; };
 		91913A84214AD594005D9108 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 91913A83214AD594005D9108 /* .swiftlint.yml */; };
 		91913A87214B25F2005D9108 /* CanvasViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91913A86214B25F2005D9108 /* CanvasViewModel.swift */; };
 		91AF00E4217B997400E7CE94 /* P2PConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91AF00E3217B997400E7CE94 /* P2PConnection.swift */; };
@@ -81,6 +82,7 @@
 		915CF3C4211BCA6000056709 /* CanvasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasView.swift; sourceTree = "<group>"; };
 		9160ED0D21793657004DF6A7 /* P2PServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = P2PServer.swift; sourceTree = "<group>"; };
 		9160ED112179A60F004DF6A7 /* Cartfile.resolved */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile.resolved; sourceTree = SOURCE_ROOT; };
+		918C0689218784D600860458 /* P2PNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = P2PNode.swift; sourceTree = "<group>"; };
 		91913A83214AD594005D9108 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .swiftlint.yml; sourceTree = "<group>"; };
 		91913A86214B25F2005D9108 /* CanvasViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasViewModel.swift; sourceTree = "<group>"; };
 		91AF00E3217B997400E7CE94 /* P2PConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = P2PConnection.swift; sourceTree = "<group>"; };
@@ -211,6 +213,7 @@
 				9160ED0D21793657004DF6A7 /* P2PServer.swift */,
 				91AF00E3217B997400E7CE94 /* P2PConnection.swift */,
 				91C70CF2217FEF5400C1C376 /* P2PState.swift */,
+				918C0689218784D600860458 /* P2PNode.swift */,
 			);
 			path = P2PServer;
 			sourceTree = "<group>";
@@ -379,6 +382,7 @@
 				91C70CF3217FEF5400C1C376 /* P2PState.swift in Sources */,
 				91080A8F215C61C2009C4CDE /* CanvasViewRenderer.swift in Sources */,
 				9160ED0E21793657004DF6A7 /* P2PServer.swift in Sources */,
+				918C068A218784D600860458 /* P2PNode.swift in Sources */,
 				915CF3C5211BCA6000056709 /* CanvasView.swift in Sources */,
 				91425641211BBBCB00786E4E /* AppDelegate.swift in Sources */,
 				91CCAC0C215431AF00E0322E /* AppViewController.swift in Sources */,

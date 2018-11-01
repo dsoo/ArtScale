@@ -17,7 +17,7 @@ class CanvasViewController: UIViewController {
     var device: MTLDevice?
 
     var canvasViewModel: CanvasViewModel = CanvasViewModel()
-    private var stroke = Stroke()
+    private var stroke = Stroke(layerID: nil)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,7 +39,7 @@ class CanvasViewController: UIViewController {
     // Input handling
     //
     override func touchesBegan(_ touches: Set<UITouch>, with _: UIEvent?) {
-        stroke = Stroke()
+        stroke = Stroke(layerID: nil)
         for touch in touches {
             let l = touch.location(in: mtkView)
             stroke.addPoint(x: Double(l.x), y: Double(l.y))
@@ -61,5 +61,5 @@ class CanvasViewController: UIViewController {
             stroke.addPoint(x: Double(l.x), y: Double(l.y))
         }
         canvasViewModel.endStroke(stroke: stroke)
-        stroke = Stroke()
+        stroke = Stroke(layerID: nil)
     }}
