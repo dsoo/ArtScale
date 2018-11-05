@@ -13,8 +13,8 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
-    var leftCM: CanvasModel?
-    var rightCM: CanvasModel?
+    var leftCM: CanvasManager?
+    var rightCM: CanvasManager?
     var leftCanvasServer: P2PServer?
     var rightCanvasServer: P2PServer?
 
@@ -22,8 +22,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         Log.enable()
 
-        leftCM = CanvasModel()
-        rightCM = CanvasModel()
+        leftCM = CanvasManager()
+        rightCM = CanvasManager()
 
         leftCanvasServer = P2PServer(name: "Left", p2pState: leftCM!)
         rightCanvasServer = P2PServer(name: "Right", p2pState: rightCM!)

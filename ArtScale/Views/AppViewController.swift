@@ -27,8 +27,8 @@ final class AppViewController: UIViewController {
 
         let ad = UIApplication.shared.delegate as! AppDelegate
 
-        left.canvasViewModel.configure(canvasModel: ad.leftCM!)
-        right.canvasViewModel.configure(canvasModel: ad.rightCM!)
+        left.canvasViewModel.configure(canvasManager: ad.leftCM!)
+        right.canvasViewModel.configure(canvasManager: ad.rightCM!)
     }
 
     override func didReceiveMemoryWarning() {

@@ -9,7 +9,8 @@
 /* Begin PBXBuildFile section */
 		91080A8F215C61C2009C4CDE /* CanvasViewRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91080A8E215C61C2009C4CDE /* CanvasViewRenderer.swift */; };
 		91080A91215C636F009C4CDE /* Shaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 91080A90215C636F009C4CDE /* Shaders.metal */; };
-		913EE42421222F4E0037B667 /* CanvasModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913EE42321222F4E0037B667 /* CanvasModel.swift */; };
+		91125088218B97AD00EA7FFE /* Canvas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91125087218B97AD00EA7FFE /* Canvas.swift */; };
+		913EE42421222F4E0037B667 /* CanvasManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913EE42321222F4E0037B667 /* CanvasManager.swift */; };
 		91425641211BBBCB00786E4E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91425640211BBBCB00786E4E /* AppDelegate.swift */; };
 		91425646211BBBCB00786E4E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 91425644211BBBCB00786E4E /* Main.storyboard */; };
 		91425648211BBBCB00786E4E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 91425647211BBBCB00786E4E /* Assets.xcassets */; };
@@ -27,7 +28,7 @@
 		91BC979E2149C74F00A52161 /* CleanroomLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91BC979D2149C74F00A52161 /* CleanroomLogger.framework */; };
 		91BC979F2149C74F00A52161 /* CleanroomLogger.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 91BC979D2149C74F00A52161 /* CleanroomLogger.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		91BC97A22149C98E00A52161 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 91BC97A12149C98E00A52161 /* .gitignore */; };
-		91C70CF3217FEF5400C1C376 /* P2PState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91C70CF2217FEF5400C1C376 /* P2PState.swift */; };
+		91C70CF3217FEF5400C1C376 /* P2PStateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91C70CF2217FEF5400C1C376 /* P2PStateManager.swift */; };
 		91CCAC0C215431AF00E0322E /* AppViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CCAC0B215431AF00E0322E /* AppViewController.swift */; };
 		91E4D88C215C31FC004C6A16 /* CanvasViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91E4D88B215C31FC004C6A16 /* CanvasViewController.swift */; };
 /* End PBXBuildFile section */
@@ -66,7 +67,8 @@
 /* Begin PBXFileReference section */
 		91080A8E215C61C2009C4CDE /* CanvasViewRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasViewRenderer.swift; sourceTree = "<group>"; };
 		91080A90215C636F009C4CDE /* Shaders.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Shaders.metal; sourceTree = "<group>"; };
-		913EE42321222F4E0037B667 /* CanvasModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasModel.swift; sourceTree = "<group>"; };
+		91125087218B97AD00EA7FFE /* Canvas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Canvas.swift; sourceTree = "<group>"; };
+		913EE42321222F4E0037B667 /* CanvasManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasManager.swift; sourceTree = "<group>"; };
 		9142563D211BBBCB00786E4E /* ArtScale.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ArtScale.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		91425640211BBBCB00786E4E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		91425645211BBBCB00786E4E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -89,7 +91,7 @@
 		91BC979B2149C54D00A52161 /* Cartfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile; sourceTree = SOURCE_ROOT; };
 		91BC979D2149C74F00A52161 /* CleanroomLogger.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CleanroomLogger.framework; path = Carthage/Build/iOS/CleanroomLogger.framework; sourceTree = "<group>"; };
 		91BC97A12149C98E00A52161 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = SOURCE_ROOT; };
-		91C70CF2217FEF5400C1C376 /* P2PState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = P2PState.swift; sourceTree = "<group>"; };
+		91C70CF2217FEF5400C1C376 /* P2PStateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = P2PStateManager.swift; sourceTree = "<group>"; };
 		91CCAC0B215431AF00E0322E /* AppViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppViewController.swift; sourceTree = "<group>"; };
 		91E4D88B215C31FC004C6A16 /* CanvasViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -179,7 +181,8 @@
 		91913A7E21488BD7005D9108 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				913EE42321222F4E0037B667 /* CanvasModel.swift */,
+				91125087218B97AD00EA7FFE /* Canvas.swift */,
+				913EE42321222F4E0037B667 /* CanvasManager.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -212,7 +215,7 @@
 			children = (
 				9160ED0D21793657004DF6A7 /* P2PServer.swift */,
 				91AF00E3217B997400E7CE94 /* P2PConnection.swift */,
-				91C70CF2217FEF5400C1C376 /* P2PState.swift */,
+				91C70CF2217FEF5400C1C376 /* P2PStateManager.swift */,
 				918C0689218784D600860458 /* P2PNode.swift */,
 			);
 			path = P2PServer;
@@ -378,8 +381,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				913EE42421222F4E0037B667 /* CanvasModel.swift in Sources */,
-				91C70CF3217FEF5400C1C376 /* P2PState.swift in Sources */,
+				913EE42421222F4E0037B667 /* CanvasManager.swift in Sources */,
+				91125088218B97AD00EA7FFE /* Canvas.swift in Sources */,
+				91C70CF3217FEF5400C1C376 /* P2PStateManager.swift in Sources */,
 				91080A8F215C61C2009C4CDE /* CanvasViewRenderer.swift in Sources */,
 				9160ED0E21793657004DF6A7 /* P2PServer.swift in Sources */,
 				918C068A218784D600860458 /* P2PNode.swift in Sources */,

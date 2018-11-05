@@ -19,14 +19,14 @@ class P2PServer: NSObject, NetServiceBrowserDelegate {
     private var listener: NWListener
     private var serverQueue: DispatchQueue
     private var p2pConnections: [P2PConnection] = []
-    private var p2pState: P2PState
+    private var p2pState: P2PStateManager
     private var peerServices: [NetService] = []
 
     func info(_ message: String) {
         Log.info?.message("P2PS:\(self.name): \(message)")
     }
 
-    init(name: String, p2pState: P2PState) {
+    init(name: String, p2pState: P2PStateManager) {
         Log.info?.message("P2PS:\(name) init")
         self.name = name
         self.p2pState = p2pState

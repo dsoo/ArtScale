@@ -19,13 +19,13 @@ class P2PConnection: P2PStateRemoteObserver {
     var queue: DispatchQueue
     var isClient: Bool = false
     var connected: Bool = false
-    var p2pState: P2PState?
+    var p2pState: P2PStateManager?
 
     func info(_ message: String) {
         Log.info?.message("CPC:\(self.name)->\(self.peerName): \(message)")
     }
 
-    init(name: String, peerName: String, connection: NWConnection, p2pState: P2PState, isClient: Bool) {
+    init(name: String, peerName: String, connection: NWConnection, p2pState: P2PStateManager, isClient: Bool) {
         Log.info?.message("CPC:\(name)->\(peerName): init")
         self.name = name
         self.peerName = peerName
@@ -77,7 +77,7 @@ class P2PConnection: P2PStateRemoteObserver {
         receiveMessage()
     }
 
-    func p2pStateUpdate(p2pState: P2PState, stateUpdate: Data) {
+    func p2pStateUpdate(p2pState: P2PStateManager, stateUpdate: Data) {
         info("p2pSU")
         // Send this update over the network to peers.
         sendMessage(body: p2pState.makeFullUpdate())
@@ -86,9 +86,9 @@ class P2PConnection: P2PStateRemoteObserver {
     func receiveMessage() {
         info("receiveMessage")
         connection.receive(minimumIncompleteLength: 8, maximumLength: 8, completion: {[weak self] (content, contentContext, isComplete, error) in
-            self!.info("\(contentContext),\(isComplete),\(error)")
+            self!.info("\(String(describing: contentContext)),\(isComplete),\(String(describing: error))")
             if (content != nil) && (content!.count > 0) {
-                self!.info("\(content!.count)")
+                self!.info("receiveMessage:\(content!.count)")
                 let len = Int(String(bytes: content!, encoding: .utf8)!)!
                 self!.receiveBody(len: len)
             } else if !isComplete {
@@ -110,6 +110,7 @@ class P2PConnection: P2PStateRemoteObserver {
 
     func handleMessage(body: Data) {
         info("handleMessage: \(body.count) bytes")
+//        info("body: \(String(describing: String(bytes: body, encoding: .utf8)))")
         p2pState!.update(p2pState: p2pState!, stateUpdate: body)
     }
 
