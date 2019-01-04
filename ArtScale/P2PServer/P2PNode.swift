@@ -25,7 +25,7 @@ class P2PNode: Codable {
     let updateTime: Date
     var version: P2PVersionHash
 
-    private(set) var state: P2PStateManager?
+//    private(set) var state: P2PStateManager?
 
     private enum CodingKeys: String, CodingKey {
         case type
@@ -34,26 +34,16 @@ class P2PNode: Codable {
         case version
     }
 
-    init(type: P2PNodeType, state: P2PStateManager) {
+    init(type: P2PNodeType) {
         // Calculate initial version hash
         self.type = type
-        self.state = state
+//        self.state = state
         self.updateTime = Date()
         self.version = P2PVersionHash()
     }
 
-    func calculateVersion() {
-//        do {
-//            let jsonEncoder = JSONEncoder()
-//            let jsonData = try jsonEncoder.encode(self)
-//            version = jsonData.crc32()
-//        } catch {
-//            Log.error?.message("Error calculating version! \(error)")
-//        }
-    }
-
     func dirty() {
         // Tell the manager that this node is dirty
-        state!.dirty(type: type, id: id)
+        // state!.dirty(type: type, id: id)
     }
 }

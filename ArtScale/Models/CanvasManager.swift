@@ -14,10 +14,6 @@ import Foundation
 class CanvasManager: P2PStateManager {
     var localObservers: [P2PStateLocalObserver] = []
     var remoteObservers: [P2PStateRemoteObserver] = []
-    static var decodeStateManager: P2PStateManager? {
-        return decodeCanvasManager
-    }
-    static var decodeCanvasManager: CanvasManager?
 
     lazy var canvas: Canvas = Canvas(canvasManager: self)
 

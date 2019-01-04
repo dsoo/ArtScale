@@ -35,7 +35,7 @@ class Stroke: P2PNode {
         self.layerID = layerID
         points = []
         //        if let c = canvas?
-        super.init(type: "Stroke", state: canvas.state!)
+        super.init(type: "Stroke")
     }
 
     private enum CodingKeys: String, CodingKey {
@@ -69,7 +69,7 @@ class Layer: P2PNode {
     }
     private(set)weak var canvas: Canvas?
     init(canvas: Canvas) {
-        super.init(type: "Layer", state: canvas.state!)
+        super.init(type: "Layer")
         self.canvas = canvas
     }
 
@@ -101,7 +101,7 @@ class Canvas: P2PNode {
     var strokes: [StrokeID: Stroke] = [:]
 
     init(canvasManager: CanvasManager) {
-        super.init(type: "Canvas", state: canvasManager)
+        super.init(type: "Canvas")
     }
 
     private enum CodingKeys: String, CodingKey {

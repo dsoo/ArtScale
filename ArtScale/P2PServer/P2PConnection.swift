@@ -10,8 +10,6 @@ import Foundation
 import Network
 import CleanroomLogger
 
-// Maintains all state necessary to synchronize the state of a canvas with a peer
-
 class P2PConnection: P2PStateRemoteObserver {
     var name: String
     var peerName: String
@@ -77,12 +75,6 @@ class P2PConnection: P2PStateRemoteObserver {
         receiveMessage()
     }
 
-    func p2pStateUpdate(p2pState: P2PStateManager, stateUpdate: Data) {
-        info("p2pSU")
-        // Send this update over the network to peers.
-        sendMessage(body: p2pState.makeFullUpdate())
-    }
-
     func receiveMessage() {
         info("receiveMessage")
         connection.receive(minimumIncompleteLength: 8, maximumLength: 8, completion: {[weak self] (content, contentContext, isComplete, error) in
@@ -110,7 +102,6 @@ class P2PConnection: P2PStateRemoteObserver {
 
     func handleMessage(body: Data) {
         info("handleMessage: \(body.count) bytes")
-//        info("body: \(String(describing: String(bytes: body, encoding: .utf8)))")
         p2pState!.update(p2pState: p2pState!, stateUpdate: body)
     }
 
@@ -131,5 +122,14 @@ class P2PConnection: P2PStateRemoteObserver {
                 self!.info("Send error: \(error)")
             }
         }))
+    }
+
+    //
+    // Implement P2PStateRemoteObserver
+    //
+    func p2pStateUpdate(p2pState: P2PStateManager, stateUpdate: Data) {
+        info("p2pSU")
+        // Send this update over the network to peers.
+        sendMessage(body: p2pState.makeFullUpdate())
     }
 }

@@ -21,17 +21,12 @@ protocol P2PStateRemoteObserver: class {
 protocol P2PStateManager: class {
     var localObservers: [P2PStateLocalObserver] {get set}
     var remoteObservers: [P2PStateRemoteObserver] {get set}
-    static var decodeStateManager: P2PStateManager? {get}
 
     func p2pStateMakeFullUpdate(p2pState: P2PStateManager) -> Data
     func p2pStateApplyFullUpdate(p2pState: P2PStateManager, fullUpdate: Data)
 }
 
 extension P2PStateManager {
-    func dirty(type: P2PNodeType, id: P2PID) {
-        // This node is dirtied, update appropriately.
-    }
-
     func makeFullUpdate() -> P2PStateUpdate {
         return p2pStateMakeFullUpdate(p2pState: self)
     }
